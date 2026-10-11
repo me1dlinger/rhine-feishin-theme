@@ -2073,6 +2073,48 @@ body:has(.player-state-playing) body::after {
     background-size: 74px 1px, 74px 1px, 5px 5px, 5px 5px !important;
 }
 
+/* --- an inverted plate keeps its ink when hovered -------------------------
+   Selected = fg ground with bg ink. Hovering must not repaint the ground on
+   its own, or a light scheme ends up with paper ink on a paper ground. Each
+   rule restates both halves at a specificity above the hover rule. -------- */
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected:hover,
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected[data-row-hovered='true'],
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected.fs-item-table-list-column-module-row-hover-highlight-enabled[data-row-hovered='true'] {
+    background-color: var(--r-fg) !important;
+    box-shadow: inset 2px 0 0 0 var(--r-accent) !important;
+}
+
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected:hover .fs-text-module-root,
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected[data-row-hovered='true'] .fs-text-module-root,
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected:hover .fs-item-table-list-column-module-content,
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected[data-row-hovered='true'] .fs-item-table-list-column-module-content,
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected:hover svg,
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected[data-row-hovered='true'] svg {
+    color: var(--r-bg) !important;
+    fill: var(--r-bg) !important;
+}
+
+/* the active page of the pager */
+.mantine-Pagination-control[data-active='true']:hover,
+.fs-pagination-module-control[data-active='true']:hover {
+    color: var(--r-bg) !important;
+    background-color: var(--r-fg) !important;
+}
+
+/* the active tab */
+.fs-tabs-module-tab[data-active='true']:hover,
+.mantine-Tabs-tab[data-active='true']:hover {
+    color: var(--r-bg) !important;
+    background-color: var(--r-fg) !important;
+}
+
+/* the active entry in the sidebar lists */
+.fs-sidebar-collection-list-module-row-active .fs-sidebar-collection-list-module-row-link:hover,
+.fs-sidebar-collection-list-module-row-active .fs-sidebar-collection-list-module-row-link:hover .fs-sidebar-collection-list-module-name {
+    color: var(--r-bg) !important;
+    background-color: var(--r-fg) !important;
+}
+
 /* --------------------------------------------------------------------------
    MODE-DEPENDENT LAYERS
    The archive ships a grain tile per mode, and a ghost has to be light on void
