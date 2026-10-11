@@ -2062,10 +2062,12 @@ body:has(.player-state-playing) body::after {
     transition-timing-function: var(--r-spring-snap) !important;
 }
 
+
 /* --- the playing plate: crop brackets, corner marks, index tab and axis ---
-   The artwork's right edge is 108px clear of the lyrics, so a 12px overhang
-   frame cannot touch the text, and brackets sit outside the plate: nothing
-   is drawn over the cover. ------------------------------------------------ */
+   Bracket arms are 18px, the frame overhangs the plate by 12px, and the
+   plate's right edge is 108px clear of the lyrics, so nothing here can reach
+   the artwork or the text. Lengths are built with units; a bare number in a
+   comma separated background-position list invalidates the whole list. ---- */
 .fs-full-screen-player-image-module-image-container::before {
     content: "" !important;
     position: absolute !important;
@@ -2073,7 +2075,7 @@ body:has(.player-state-playing) body::after {
     z-index: 3 !important;
     pointer-events: none !important;
     background-image: linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0) !important;
-    background-position: 12 12, 12 12, calc(100% - 30px) 12, calc(100% - 13px) 12, 12 calc(100% - 13px), 12 calc(100% - 30px), calc(100% - 30px) calc(100% - 13px), calc(100% - 13px) calc(100% - 30px), 12 12, calc(100% - 18px) 12, 12 calc(100% - 18px), calc(100% - 18px) calc(100% - 18px), calc(50% - 13px) -1px !important;
+    background-position: 12px 12px, 12px 12px, calc(100% - 30px) 12px, calc(100% - 13px) 12px, 12px calc(100% - 13px), 12px calc(100% - 30px), calc(100% - 30px) calc(100% - 13px), calc(100% - 13px) calc(100% - 30px), 12px 12px, calc(100% - 18px) 12px, 12px calc(100% - 18px), calc(100% - 18px) calc(100% - 18px), calc(50% - 13px) -1px !important;
     background-repeat: no-repeat !important;
     background-size: 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 6px 6px, 6px 6px, 6px 6px, 6px 6px, 26px 3px !important;
 }
@@ -2086,9 +2088,9 @@ body:has(.player-state-playing) body::after {
     z-index: 3 !important;
     pointer-events: none !important;
     background-image: linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg) 0 0), linear-gradient(var(--r-fg) 0 0) !important;
-    background-position: 0 calc(50% - 1px), calc(100% - 74px) calc(50% - 1px), 0 calc(50% - 3px), calc(100% - 5px) calc(50% - 3px) !important;
+    background-position: 5px calc(50% - 1px), calc(100% - 62px) calc(50% - 1px), 0px calc(50% - 3px), calc(100% - 5px) calc(50% - 3px) !important;
     background-repeat: no-repeat !important;
-    background-size: 74px 1px, 74px 1px, 5px 5px, 5px 5px !important;
+    background-size: 57px 1px, 57px 1px, 5px 5px, 5px 5px !important;
 }
 
 /* --------------------------------------------------------------------------
