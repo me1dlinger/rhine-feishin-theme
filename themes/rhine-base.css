@@ -1935,14 +1935,17 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
    place     z-index -1 under the content, in the gutter the page leaves at the
              bottom right, clear of the intense thing (the lists)
    ------------------------------------------------------------------------- */
-#main-content::after {
+/* --- the equipment bay keeps a small ring in its blank band ------------ */
+#sidebar::after,
+.fs-left-sidebar-module-container::after {
     content: "" !important;
     position: absolute !important;
-    right: 2.5% !important;
-    bottom: 3% !important;
-    z-index: -1 !important;
-    width: min(34vw, 460px) !important;
-    height: min(34vw, 460px) !important;
+    top: 40% !important;
+    left: 50% !important;
+    z-index: 0 !important;
+    width: 176px !important;
+    height: 176px !important;
+    margin: -88px 0 0 -88px !important;
     pointer-events: none !important;
     background-color: var(--r-fg) !important;
     background-image:
@@ -1957,10 +1960,37 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
     mask-repeat: no-repeat !important;
     -webkit-mask-size: contain !important;
     mask-size: contain !important;
-    opacity: 0.22 !important;
-    animation: rhine-breathe 13s var(--r-spring-soft) infinite alternate !important;
+    opacity: 0.16 !important;
 }
 
+/* --- the full screen player: the ring as the hero, in the gutter between
+   the artwork and the lyrics ------------------------------------------- */
+.fs-full-screen-player-module-container::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 32% !important;
+    left: 39.6% !important;
+    z-index: 3 !important;
+    width: min(22vw, 330px) !important;
+    height: min(22vw, 330px) !important;
+    margin: calc(min(22vw, 330px) / -2) 0 0 calc(min(22vw, 330px) / -2) !important;
+    pointer-events: none !important;
+    background-color: var(--r-fg) !important;
+    background-image:
+        linear-gradient(var(--r-accent) 0 0),
+        linear-gradient(var(--r-accent) 0 0) !important;
+    background-repeat: no-repeat !important;
+    background-position: 55.76615272618465% 44.280555987788496%, 44.23384727381533% 55.719444012211525% !important;
+    background-size: 5% 5%, 5% 5% !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,,") !important;
+    mask-image: url("data:image/svg+xml;base64,,") !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+    opacity: 0.3 !important;
+    animation: rhine-breathe 13s var(--r-spring-soft) infinite alternate !important;
+}
 @keyframes rhine-breathe {
     from { opacity: 0.16; transform: scale(0.975); }
     to { opacity: 0.26; transform: scale(1.025); }
@@ -1968,7 +1998,8 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
 
 @media (prefers-reduced-motion: reduce) {
     #root,
-    #main-content::after,
+    #sidebar::after,
+    .fs-full-screen-player-module-container::after,
     .fs-tabs-module-tab[data-active='true'],
     .mantine-Tabs-tab[data-active='true'] {
         animation: none !important;
