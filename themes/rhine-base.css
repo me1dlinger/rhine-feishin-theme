@@ -1821,6 +1821,156 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
     background-color: var(--r-bg) !important;
     border-top: 1px solid var(--r-hair) !important;
 }
+/* ==========================================================================
+   RHINe · MOTION AND THE RING
+   Two things taken from the reference's own source rather than approximated.
+
+   1. MOTION. motion.js runs one critically damped spring (Spring(x, w),
+      typically w = 9..18) for every interactive move. A spring's response to a
+      step is x(t) = 1 - (1 + w t)e^(-w t); that curve is sampled into a CSS
+      linear() easing, so hover, selection and press settle the way the
+      reference does rather than on a guessy cubic-bezier.
+
+   2. THE RING. ring.js's 2D mode, generated as a mask (see ring.cjs) so the
+      tube takes its colour from the scheme, with the two accent squares of the
+      gap painted as accent gradient layers on top, because a mask can only
+      tint one way. It is mounted on the full screen player's own overlay:
+      that overlay is viewport-wide, so anything under it is hidden.
+   ========================================================================== */
+
+:root {
+    --r-spring: linear(0, 0.1832, 0.4606, 0.6768, 0.8168, 0.8999, 0.9467, 0.9722, 0.9857, 0.9927, 0.9963, 0.9982, 0.9991, 0.9995, 0.9998, 0.9999, 0.9999, 1, 1, 1, 1, 1, 1, 1, 1);
+    --r-spring-soft: linear(0, 0.0902, 0.2642, 0.4422, 0.594, 0.7127, 0.8009, 0.8641, 0.9084, 0.9389, 0.9596, 0.9734, 0.9826, 0.9887, 0.9927, 0.9953, 0.997, 0.9981, 0.9988, 0.9992, 0.9995, 0.9997, 0.9998, 0.9999, 1);
+}
+
+/* --- everything interactive settles on the spring ------------------------ */
+.fs-button-module-root,
+.mantine-Button-root,
+.fs-action-icon-module-root,
+.mantine-ActionIcon-root,
+.fs-sidebar-item-module-link,
+.fs-tabs-module-tab,
+.mantine-Tabs-tab,
+.mantine-Menu-item,
+.fs-select-module-option,
+.fs-item-card-module-container,
+.fs-poster-card-module-container,
+.fs-grid-card-module-container,
+.fs-collapsed-sidebar-item-module-container,
+.mantine-Pagination-control,
+.fs-segmented-control-module-label,
+[cmdk-item] {
+    transition:
+        background-color 300ms var(--r-spring),
+        color 300ms var(--r-spring),
+        border-color 300ms var(--r-spring) !important;
+}
+
+/* the active plate arrives rather than blinks: the reference slides a plate
+   between tabs, and a spring wipe reads the same way without a shared element */
+.fs-tabs-module-tab[data-active='true'],
+.mantine-Tabs-tab[data-active='true'],
+.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active {
+    animation: rhine-plate 380ms var(--r-spring) 1 both !important;
+}
+
+@keyframes rhine-plate {
+    from { transform: scaleX(0); transform-origin: left center; }
+    to { transform: scaleX(1); transform-origin: left center; }
+}
+
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row {
+    transition:
+        background-color 240ms var(--r-spring),
+        box-shadow 240ms var(--r-spring) !important;
+}
+
+.fs-item-card-module-image,
+.fs-poster-card-module-image,
+.fs-image-module-image {
+    transition: transform 420ms var(--r-spring), filter 420ms var(--r-spring) !important;
+}
+
+/* --- boot: the tube warms up (fx.js flickers at 0/70/140/210 ms) --------- */
+#root {
+    animation: rhine-boot 460ms steps(4, end) 1 both !important;
+}
+
+@keyframes rhine-boot {
+    0% { opacity: 0.25; }
+    25% { opacity: 1; }
+    50% { opacity: 0.6; }
+    75% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+/* --- the signal trace: the played rule in fg, the rest in line-dim, and a
+   1.5dp accent playhead, as transport.js draws it ------------------------- */
+.mantine-Slider-root .mantine-Slider-track {
+    background-color: var(--r-line-dim) !important;
+}
+
+.mantine-Slider-root .mantine-Slider-bar {
+    background-color: var(--r-fg) !important;
+    background-image: none !important;
+}
+
+.mantine-Slider-root .mantine-Slider-thumb {
+    width: 1.5px !important;
+    height: 20px !important;
+    background-color: var(--r-accent) !important;
+    box-shadow: none !important;
+}
+
+.fs-playerbar-slider-module-slider-container {
+    border-top: 1px solid var(--r-line-faint) !important;
+}
+
+/* --- THE RING -------------------------------------------------------------
+   tube      the element's own mask, tinted with --r-fg
+   gap ends  two accent gradient layers at the positions ring.cjs measured
+   motion    a slow breathe; ring.js rotates the gap, never the figure, so
+             spinning the whole shape here would be wrong
+   ------------------------------------------------------------------------- */
+.fs-full-screen-player-module-container::after {
+    content: "" !important;
+    position: absolute !important;
+    right: 4% !important;
+    bottom: 10% !important;
+    z-index: 3 !important;
+    width: min(30vw, 430px) !important;
+    height: min(30vw, 430px) !important;
+    pointer-events: none !important;
+    background-color: var(--r-fg) !important;
+    background-image:
+        linear-gradient(var(--r-accent) 0 0),
+        linear-gradient(var(--r-accent) 0 0) !important;
+    background-repeat: no-repeat !important;
+    background-position: 55.76615272618465% 44.280555987788496%, 44.23384727381533% 55.719444012211525% !important;
+    background-size: 5% 5%, 5% 5% !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,,") !important;
+    mask-image: url("data:image/svg+xml;base64,,") !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+    opacity: 0.14 !important;
+    animation: rhine-breathe 13s var(--r-spring-soft) infinite alternate !important;
+}
+
+@keyframes rhine-breathe {
+    from { opacity: 0.1; transform: scale(0.97); }
+    to { opacity: 0.18; transform: scale(1.03); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #root,
+    .fs-full-screen-player-module-container::after,
+    .fs-tabs-module-tab[data-active='true'],
+    .mantine-Tabs-tab[data-active='true'] {
+        animation: none !important;
+    }
+}
 /* --------------------------------------------------------------------------
    MODE-DEPENDENT LAYERS
    The archive ships a grain tile per mode, and a ghost has to be light on void
