@@ -1,0 +1,37 @@
+/* ==========================================================================
+   RHINe — extras. Loaded through the theme so @keyframes survive; Feishin's
+   Custom CSS sanitiser drops them, which is why they are not in the base.
+   ========================================================================== */
+
+@keyframes rhine-turn {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* the view change: a scan band with a bright head sweeping left to right */
+@keyframes rhine-wipe {
+    from { transform: translateX(-222px); }
+    to { transform: translateX(100vw); }
+}
+
+/* hazard stripes crawl, as the archive's do */
+@keyframes rhine-hazard {
+    from { background-position: 0 0; }
+    to { background-position: 16px 0; }
+}
+
+.fs-window-bar-module-window-bar::after {
+    animation: rhine-turn 40s linear infinite !important;
+}
+
+.fs-page-header-module-container .header::before {
+    animation: rhine-hazard 640ms linear infinite !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fs-window-bar-module-window-bar::after,
+    .fs-page-header-module-container .header::before,
+    .fs-animated-page-module-animated-page::after {
+        animation: none !important;
+    }
+}

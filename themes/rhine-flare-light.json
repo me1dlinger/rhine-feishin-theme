@@ -1,0 +1,88 @@
+{
+  "app": {
+    "content-max-width": "1800px",
+    "overlay-header": "linear-gradient(transparent 0%, #f8eee3e6 100%)",
+    "overlay-subheader": "linear-gradient(180deg, #f8eee300 0%, #f8eee3 100%)",
+    "root-font-size": "13px",
+    "scrollbar-handle-active-background": "#b23c0a",
+    "scrollbar-handle-background": "#d9b295",
+    "scrollbar-handle-hover-background": "#a35a2c",
+    "scrollbar-size": "10px",
+    "scrollbar-track-background": "#f8eee3",
+    "scrollbar-track-hover-background": "#f8eee3"
+  },
+  "colors": {
+    "bg": "#f8eee3",
+    "fg": "#241309",
+    "fg-soft": "#5c2f13",
+    "text-muted": "#7a4526",
+    "line-dim": "#a35a2c",
+    "accent": "#b23c0a",
+    "mark": "#8a5230",
+    "line-faint": "#d9b295",
+    "hair": "#e2c4ab",
+    "panel": "#fdf5ec",
+    "panel-hi": "#fffaf4",
+    "case": "#f0e0d0",
+    "case-hi": "#f9ebde",
+    "well": "#e8d3c1",
+    "on-accent": "#fff8f1",
+    "background": "#f8eee3",
+    "background-alternate": "#fdf5ec",
+    "black": "#f8eee3",
+    "border": "#e2c4ab",
+    "foreground": "#241309",
+    "foreground-muted": "#7a4526",
+    "primary": "#b23c0a",
+    "state-error": "#e0463a",
+    "state-info": "#8a5230",
+    "state-success": "#241309",
+    "state-warning": "#b23c0a",
+    "surface": "#f0e0d0",
+    "surface-foreground": "#241309",
+    "white": "#241309"
+  },
+  "mantineOverride": {
+    "autoContrast": true,
+    "black": "#f8eee3",
+    "colors": {
+      "dark": [
+        "#8a5230",
+        "#a35a2c",
+        "#d9b295",
+        "#e2c4ab",
+        "#f9ebde",
+        "#f0e0d0",
+        "#fffaf4",
+        "#fdf5ec",
+        "#e8d3c1",
+        "#f8eee3"
+      ]
+    },
+    "defaultRadius": 0,
+    "fontFamily": "\"Geist Mono\", \"Departure Mono\", \"IBM Plex Mono\", \"Noto Sans SC\", \"Source Han Sans SC\", \"思源黑体\", \"Noto Sans JP\", monospace",
+    "fontFamilyMonospace": "\"Geist Mono\", \"Departure Mono\", \"IBM Plex Mono\", \"Noto Sans SC\", \"Source Han Sans SC\", \"思源黑体\", \"Noto Sans JP\", monospace",
+    "headings": {
+      "fontFamily": "\"Geist Mono\", \"Departure Mono\", \"IBM Plex Mono\", \"Noto Sans SC\", \"Source Han Sans SC\", \"思源黑体\", \"Noto Sans JP\", monospace"
+    },
+    "luminanceThreshold": 0.4,
+    "primaryColor": "primary",
+    "primaryShade": {
+      "dark": 5,
+      "light": 5
+    },
+    "radius": {
+      "lg": "0px",
+      "md": "0px",
+      "sm": "0px",
+      "xl": "0px",
+      "xs": "0px"
+    },
+    "white": "#241309"
+  },
+  "mode": "light",
+  "stylesheets": [
+    "./rhine-base.css",
+    "./rhine-extras.css"
+  ]
+}
