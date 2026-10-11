@@ -2007,6 +2007,61 @@ body:has(.player-state-playing) body::after {
     }
 }
 
+/* --- crop brackets on the album plates -----------------------------------
+   The card ::before is the app's hover scrim, so this is ::after, and it
+   paints only where there is padding: nothing is laid over the artwork. -- */
+.fs-item-card-module-image-container::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: -7px !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+    opacity: 0.75 !important;
+    background-image: linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0) !important;
+    background-position: 4px 4px, 4px 4px, calc(100% - 18px) 4px, calc(100% - 5px) 4px, 4px calc(100% - 5px), 4px calc(100% - 18px), calc(100% - 18px) calc(100% - 5px), calc(100% - 5px) calc(100% - 18px), 4px 4px, calc(100% - 10px) 4px, 4px calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), 4px -1px !important;
+    background-repeat: no-repeat !important;
+    background-size: 14px 1px, 1px 14px, 14px 1px, 1px 14px, 14px 1px, 1px 14px, 14px 1px, 1px 14px, 6px 6px, 6px 6px, 6px 6px, 6px 6px, 26px 3px !important;
+    transition: opacity 300ms var(--r-spring) !important;
+}
+
+/* a hovered plate lights its frame */
+.fs-item-card-module-container:hover .fs-item-card-module-image-container::after {
+    opacity: 1 !important;
+}
+/* --- things that arrive take the spring too -------------------------------- */
+/* a view fades in on the soft spring; opacity only, because a transform here
+   would make the page a containing block and move the app's fixed headers */
+.fs-animated-page-module-animated-page {
+    animation: rhine-enter 420ms var(--r-spring-soft) 1 both !important;
+}
+
+@keyframes rhine-enter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* the equipment bays slide rather than snap */
+.fs-main-content-module-main-content-container {
+    transition: grid-template-columns 380ms var(--r-spring) !important;
+}
+
+/* menus, popovers and modals open on the hard spring */
+.mantine-Menu-dropdown,
+.mantine-Popover-dropdown,
+.mantine-Select-dropdown,
+.mantine-Combobox-dropdown,
+.mantine-Modal-content,
+.mantine-Tooltip-tooltip,
+.fs-dropdown-menu-module-menu-dropdown,
+.fs-select-module-dropdown,
+.fs-popover-module-dropdown,
+.fs-context-menu-module-content,
+.fs-modal-module-content,
+.fs-dialog-module-root {
+    transition-duration: 170ms !important;
+    transition-timing-function: var(--r-spring-snap) !important;
+}
+
 /* --------------------------------------------------------------------------
    MODE-DEPENDENT LAYERS
    The archive ships a grain tile per mode, and a ghost has to be light on void
