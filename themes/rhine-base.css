@@ -2007,28 +2007,6 @@ body:has(.player-state-playing) body::after {
     }
 }
 
-/* --- crop brackets on the album plates -----------------------------------
-   The card ::before is the app's hover scrim, so this is ::after, and it
-   paints only where there is padding: nothing is laid over the artwork. -- */
-.fs-item-card-module-image-container::after {
-    content: "" !important;
-    position: absolute !important;
-    inset: -7px !important;
-    z-index: 2 !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    background-image: linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0) !important;
-    background-position: 4px 4px, 4px 4px, calc(100% - 18px) 4px, calc(100% - 5px) 4px, 4px calc(100% - 5px), 4px calc(100% - 18px), calc(100% - 18px) calc(100% - 5px), calc(100% - 5px) calc(100% - 18px), 4px 4px, calc(100% - 10px) 4px, 4px calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), 4px -1px !important;
-    background-repeat: no-repeat !important;
-    background-size: 14px 1px, 1px 14px, 14px 1px, 1px 14px, 14px 1px, 1px 14px, 14px 1px, 1px 14px, 6px 6px, 6px 6px, 6px 6px, 6px 6px, 26px 3px !important;
-    transition: opacity 300ms var(--r-spring) !important;
-}
-
-/* a hovered plate lights its frame */
-.fs-item-card-module-container:hover .fs-item-card-module-image-container::after,
-.fs-item-card-module-container.selected .fs-item-card-module-image-container::after {
-    opacity: 0.95 !important;
-}
 /* --- things that arrive take the spring too -------------------------------- */
 /* a view fades in on the soft spring; opacity only, because a transform here
    would make the page a containing block and move the app's fixed headers */
