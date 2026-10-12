@@ -298,7 +298,7 @@ h6 {
 }
 
 .fs-window-bar-module-window-bar::before {
-    content: "AUDIO ARCHIVE" !important;
+    content: "RHINE LAB\A ANALYSIS OS" !important;
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -316,7 +316,7 @@ h6 {
     font-weight: 600 !important;
     letter-spacing: 0.1em !important;
     line-height: 1.15 !important;
-    white-space: normal !important;
+    white-space: pre-line !important;
 }
 
 .fs-window-bar-module-window-bar::after {
@@ -1583,7 +1583,8 @@ body::after {
 }
 
 /* --- section header: a 5dp square, then the label; the rule under it is a
-   hairline that stops short of the right margin --------------------------- */
+   hairline that stops short of the right margin. The label carries the
+   archive's eyebrow — the reference prefixes every section the same way --- */
 .fs-page-header-module-container .fs-page-header-module-title-wrapper::before {
     content: "" !important;
     display: inline-block !important;
@@ -1592,6 +1593,23 @@ body::after {
     margin-right: 9px !important;
     vertical-align: 2px !important;
     background-color: var(--r-accent) !important;
+}
+
+.fs-page-header-module-container h1::before,
+.fs-page-header-module-container .fs-page-header-module-title::before {
+    content: "INTERNAL DATABASE \FF0F " !important;
+    margin-right: 10px !important;
+    color: var(--r-muted) !important;
+    font-family: var(--r-font-medium) !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.16em !important;
+    vertical-align: 1px !important;
+}
+
+.fs-page-header-module-container h1,
+.fs-page-header-module-container .fs-page-header-module-title {
+    animation: rhine-decrypt 820ms cubic-bezier(0.22, 1, 0.36, 1) 1 both !important;
 }
 
 .fs-page-header-module-container .header::after {
@@ -1655,6 +1673,50 @@ body::after {
 .mantine-Pagination-control,
 .fs-pagination-module-control {
     position: relative !important;
+}
+
+/* --- every position in the pager carries the archive's tick, the device the
+   reference reads a selection with: a 2dp bar that stands 12dp at rest,
+   24dp under the pointer and 33dp on the current position ----------------- */
+.fs-pagination-module-control::before,
+.mantine-Pagination-control::before {
+    content: "" !important;
+    position: absolute !important;
+    bottom: calc(100% + 5px) !important;
+    left: 50% !important;
+    width: 2px !important;
+    height: 12px !important;
+    margin-left: -1px !important;
+    pointer-events: none !important;
+    background-color: var(--r-line-faint) !important;
+    transition:
+        height 400ms var(--r-spring),
+        background-color 400ms var(--r-spring) !important;
+}
+
+.fs-pagination-module-control:hover::before,
+.mantine-Pagination-control:hover::before {
+    height: 24px !important;
+    background-color: var(--r-accent) !important;
+}
+
+.fs-pagination-module-control[data-active='true']::before,
+.mantine-Pagination-control[data-active='true']::before {
+    height: 33px !important;
+    background-color: var(--r-fg) !important;
+}
+
+/* the tick is the selection here, as it is in the reference's scale: the
+   number stays plain and the square marker belongs to tabs only ---------- */
+.fs-pagination-module-control[data-active='true'],
+.mantine-Pagination-control[data-active='true'] {
+    background-color: transparent !important;
+    color: var(--r-fg) !important;
+}
+
+.fs-pagination-module-control[data-active='true']::after,
+.mantine-Pagination-control[data-active='true']::after {
+    display: none !important;
 }
 
 /* --- the search field is an underline, not a box ------------------------- */
@@ -1867,7 +1929,7 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
    header and the shelf lip, the status line belongs here. ---------------- */
 #player-bar::before,
 .fs-player-bar-module-container::before {
-    content: "ARCHIVE SECTION · MONITOR" !important;
+    content: "\25A0 SESSION AUTHORIZED" !important;
     position: absolute !important;
     bottom: 2px !important;
     left: 42px !important;
@@ -2032,6 +2094,19 @@ h5.fs-feature-carousel-module-title {
 
 .fs-feature-carousel-module-metadata-section .fs-text-module-root {
     animation-delay: 320ms !important;
+}
+
+/* the caption opens with the archive's eyebrow, as the reference heads every
+   document: the database, a slash, then the entry -------------------------- */
+.fs-feature-carousel-module-metadata-section > .mantine-Stack-root::before {
+    content: "INTERNAL DATABASE \FF0F" !important;
+    margin-bottom: 7px !important;
+    color: var(--r-muted) !important;
+    font-family: var(--r-font-medium) !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
 }
 
 /* the tube's own shadow: a blurred copy dropped down and right ------------ */
