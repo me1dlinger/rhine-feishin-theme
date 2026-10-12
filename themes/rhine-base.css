@@ -2161,6 +2161,16 @@ h5.fs-feature-carousel-module-title,
     }
 }
 
+/* reduce motion: the figure holds still, as ring.js freezes its pulses ------ */
+@media (prefers-reduced-motion: reduce) {
+    .fs-feature-carousel-module-carousel-item::before,
+    .fs-feature-carousel-module-carousel-item::after,
+    .fs-feature-carousel-module-content::before,
+    .fs-feature-carousel-module-content::after {
+        animation: none !important;
+    }
+}
+
 /* --- the queue and now-playing lists step down to the ground, so a filled
    plate stays the only raised surface ----------------------------------- */
 .fs-sidebar-play-queue-module-queue-container,
