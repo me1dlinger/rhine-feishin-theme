@@ -373,6 +373,21 @@ h6 {
     border-bottom: 1px solid var(--r-hair) !important;
 }
 
+/* where a tab strip follows the header the two are one plate: no rule between
+   them, the strip rides on the data and carries the rule itself, so a row is
+   never cut off at the header's own edge -------------------------------- */
+.fs-main-content-module-main-content-body:has(.fs-tabs-module-list) .fs-page-header-module-container,
+.fs-main-content-module-main-content-body:has(.fs-tabs-module-list) .fs-page-header-module-container .header {
+    border-bottom: 0 !important;
+}
+
+.fs-tabs-module-list {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 40 !important;
+    background-color: var(--r-bg) !important;
+}
+
 .fs-page-header-module-container .fs-page-header-module-title-wrapper {
     position: relative !important;
 }
@@ -605,27 +620,34 @@ h6 {
     border-color: var(--r-accent) !important;
 }
 
+/* switches: off is an outlined track with the mark at its left, on fills the
+   track with the accent and flips the mark to the accent's ink. The outline
+   is drawn with an inset ring rather than a border, so the mark keeps the
+   track's own centring. Feishin's markup puts the input beside the track
+   rather than inside it, so the state is read off the input's sibling ---- */
 .mantine-Switch-track,
 .fs-switch-module-track {
+    border: 0 !important;
     border-radius: 0 !important;
-    border: 1px solid var(--r-line-faint) !important;
     background-color: var(--r-bg) !important;
+    box-shadow: inset 0 0 0 1px var(--r-line-faint) !important;
 }
 
 .mantine-Switch-thumb,
 .fs-switch-module-thumb {
+    border: 0 !important;
     border-radius: 0 !important;
     background-color: var(--r-fg) !important;
-    border: 1px solid var(--r-bg) !important;
 }
 
-.mantine-Switch-track:has(input:checked),
-.fs-switch-module-track:has(input:checked) {
+.mantine-Switch-input:checked ~ .mantine-Switch-track,
+.fs-switch-module-input:checked ~ .fs-switch-module-track {
     background-color: var(--r-accent) !important;
-    border-color: var(--r-accent) !important;
+    box-shadow: inset 0 0 0 1px var(--r-accent) !important;
 }
 
-.mantine-Switch-track:has(input:checked) .mantine-Switch-thumb {
+.mantine-Switch-input:checked ~ .mantine-Switch-track .mantine-Switch-thumb,
+.fs-switch-module-input:checked ~ .fs-switch-module-track .fs-switch-module-thumb {
     background-color: var(--r-on-accent) !important;
 }
 
@@ -1366,6 +1388,26 @@ body::after {
     background-color: var(--r-bg) !important;
 }
 
+/* Feishin mounts OverlayScrollbars on the scroll element itself on the
+   settings and sidebar surfaces, so the overlay bar rides the content and
+   slides under the page header. Those areas go back to the native bar,
+   which stays put and keeps its own gutter beside the data. The app hides
+   the native bar with display, width and height, so all three are reset --- */
+[data-overlayscrollbars][data-overlayscrollbars-viewport] {
+    scrollbar-width: auto !important;
+}
+
+[data-overlayscrollbars][data-overlayscrollbars-viewport]::-webkit-scrollbar {
+    appearance: auto !important;
+    display: block !important;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+[data-overlayscrollbars][data-overlayscrollbars-viewport] > .os-scrollbar {
+    display: none !important;
+}
+
 /* --------------------------------------------------------------------------
    SETTINGS
    Rows are parted by hairlines; the mode switch reads as a plate.
@@ -1378,6 +1420,101 @@ body::after {
 
 .fs-settings-option-module-row-indented {
     border-left: 2px solid var(--r-accent) !important;
+}
+
+/* --- the list config sheet: the label column hugs its labels rather than
+   taking half the sheet, and a row is parted by one hairline across both
+   cells instead of a heavy rule under the label alone -------------------- */
+.fs-list-config-menu-module-th {
+    width: 1px !important;
+    padding-right: 24px !important;
+    border-bottom: 1px solid var(--r-hair) !important;
+    background-color: transparent !important;
+    color: var(--r-fg) !important;
+    font-family: var(--r-font) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+}
+
+.fs-list-config-menu-module-td {
+    padding-left: 8px !important;
+    border-bottom: 1px solid var(--r-hair) !important;
+}
+
+/* --- the row lists inside the sheet (grid rows, table columns): one row per
+   line parted by a hairline, the label left, the controls on a right-hand
+   rail. The control groups drop their frames and part with a hairline
+   instead, so an unset control is quiet and only the chosen one carries the
+   filled plate ----------------------------------------------------------- */
+.fs-table-config-module-item {
+    padding: 6px 0 !important;
+    border-bottom: 1px solid var(--r-hair) !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.fs-table-config-module-item:hover {
+    background-color: var(--r-panel) !important;
+}
+
+.fs-table-config-module-item:hover .fs-text-module-root,
+.fs-table-config-module-item:hover .mantine-Checkbox-label {
+    color: var(--r-fg) !important;
+}
+
+.fs-table-config-module-group {
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.fs-table-config-module-group + .fs-table-config-module-group {
+    margin-left: 7px !important;
+    padding-left: 7px !important;
+    border-left: 1px solid var(--r-hair) !important;
+}
+
+.fs-table-config-module-item .fs-action-icon-module-root[data-variant='subtle'],
+.fs-table-config-module-item .fs-action-icon-module-root[data-variant='default'] {
+    color: var(--r-muted) !important;
+}
+
+.fs-table-config-module-item .fs-action-icon-module-root[data-variant='subtle']:hover,
+.fs-table-config-module-item .fs-action-icon-module-root[data-variant='default']:hover {
+    color: var(--r-fg) !important;
+    background-color: var(--r-case) !important;
+}
+
+.fs-table-config-module-item .fs-action-icon-module-root[data-variant='filled'] {
+    color: var(--r-bg) !important;
+    background-color: var(--r-fg) !important;
+}
+
+/* --- the stretched steppers in the sheet's general rows read as two stray
+   arrows: let them keep a control's size and park on the rail ------------- */
+.fs-list-config-menu-module-control .mantine-Group-root > .fs-action-icon-module-root {
+    flex: 0 0 auto !important;
+    width: 24px !important;
+    min-width: 24px !important;
+}
+
+/* --- the sheet's own header is the plate over the data: it needs ground, or
+   the rows show through the padding above and below the bar. Where it holds
+   the page's bar it takes the bar's height for its own, so the block ends on
+   the bar's rule --------------------------------------------------------- */
+.fs-modal-module-header,
+.mantine-Modal-header {
+    background-color: var(--r-bg) !important;
+}
+
+.fs-modal-module-header:has(.fs-page-header-module-container),
+.mantine-Modal-header:has(.fs-page-header-module-container) {
+    padding: 0 !important;
+    border-bottom: 0 !important;
 }
 
 /* ==========================================================================
@@ -1563,35 +1700,18 @@ body::after {
     display: none !important;
 }
 
-/* --- a segmented control is a row of marks beside capitals --------------- */
+/* --- a segmented control is a row of capitals where the chosen one is
+   inverted. The unset options carry no mark of their own: an empty box in
+   front of an unchosen option reads as a checkbox that failed to tick ----- */
 .mantine-SegmentedControl-label,
 .fs-segmented-control-module-label {
-    display: inline-flex !important;
-    gap: 6px !important;
-    align-items: center !important;
     padding: 3px 8px !important;
-}
-
-.mantine-SegmentedControl-label::before,
-.fs-segmented-control-module-label::before {
-    content: "" !important;
-    flex-shrink: 0 !important;
-    width: 5px !important;
-    height: 5px !important;
-    border: 1px solid var(--r-line-dim) !important;
-    background-color: transparent !important;
 }
 
 .mantine-SegmentedControl-label[data-active='true'],
 .fs-segmented-control-module-label[data-active='true'] {
     background-color: var(--r-fg) !important;
     color: var(--r-bg) !important;
-}
-
-.mantine-SegmentedControl-label[data-active='true']::before,
-.fs-segmented-control-module-label[data-active='true']::before {
-    border-color: var(--r-bg) !important;
-    background-color: var(--r-bg) !important;
 }
 
 /* --- chips: the "acc" kind, an orange outline with an orange square ------ */
