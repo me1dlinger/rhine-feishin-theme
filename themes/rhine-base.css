@@ -1554,23 +1554,6 @@ body::after {
      scan wipe     4dp scan lines in a 222dp band with a 2dp bright head
    ========================================================================== */
 
-/* --- registration crosses and crop brackets, drawn as gradients so they stay
-   scheme-aware and never stretch with the element ------------------------- */
-.fs-main-content-module-main-content-body {
-    background-image: linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0), linear-gradient(var(--r-line-dim) 0 0) !important;
-    background-position: 14px 14px, 14px 14px, calc(100% - 32px) 14px, calc(100% - 15px) 14px, 14px calc(100% - 15px), 14px calc(100% - 32px), calc(100% - 32px) calc(100% - 15px), calc(100% - 15px) calc(100% - 32px) !important;
-    background-repeat: no-repeat !important;
-    background-size: 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px !important;
-}
-
-#sidebar,
-.fs-left-sidebar-module-container {
-    background-image: linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0), linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0), linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0), linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0), linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0), linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0), linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0), linear-gradient(color-mix(in srgb, var(--r-mark) 58%, transparent) 0 0) !important;
-    background-position: 12px 17px, 17px 12px, calc(100% - 23px) 17px, calc(100% - 18px) 12px, 12px calc(100% - 18px), 17px calc(100% - 23px), calc(100% - 23px) calc(100% - 18px), calc(100% - 18px) calc(100% - 23px) !important;
-    background-repeat: no-repeat !important;
-    background-size: 11px 1px, 1px 11px, 11px 1px, 1px 11px, 11px 1px, 1px 11px, 11px 1px, 1px 11px !important;
-}
-
 /* --- the scan wipe on every view change: a band of scan lines with a bright
    2dp head sweeping left to right, 4dp line pitch ------------------------- */
 .fs-animated-page-module-animated-page {
@@ -1992,25 +1975,10 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
     background-color: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
-    background-image:
-    linear-gradient(var(--r-hair) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0) !important;
-    background-position:
-    calc(100% - 300px) 0,
-    13px 13px, 13px 13px, calc(100% - 13px) 13px, calc(100% - 13px) 13px,
-    13px calc(100% - 13px), 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(100% - 13px) calc(100% - 13px),
-    13px 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px) !important;
+    background-image: linear-gradient(var(--r-hair) 0 0) !important;
+    background-position: calc(100% - 300px) 0 !important;
     background-repeat: no-repeat !important;
-    background-size:
-    1px 100%,
-    18px 1px, 1px 18px, 18px 1px, 1px 18px,
-    18px 1px, 1px 18px, 18px 1px, 1px 18px,
-    6px 6px, 6px 6px, 6px 6px, 6px 6px !important;
+    background-size: 1px 100% !important;
 }
 
 .fs-feature-carousel-module-content {
@@ -2195,20 +2163,9 @@ h5.fs-feature-carousel-module-title,
 }
 
 @media (max-width: 1180px) {
-    /* no room for the field: the banner keeps only its frame */
+    /* no room for the field: the banner carries no ornament at all */
     .fs-feature-carousel-module-carousel-item {
-        background-image: linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
-    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0) !important;
-        background-position: 13px 13px, 13px 13px, calc(100% - 13px) 13px, calc(100% - 13px) 13px,
-    13px calc(100% - 13px), 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(100% - 13px) calc(100% - 13px),
-    13px 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px) !important;
-        background-size: 18px 1px, 1px 18px, 18px 1px, 1px 18px,
-    18px 1px, 1px 18px, 18px 1px, 1px 18px,
-    6px 6px, 6px 6px, 6px 6px, 6px 6px !important;
+        background-image: none !important;
     }
 
     .fs-feature-carousel-module-carousel-item::before,
