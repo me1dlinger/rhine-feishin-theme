@@ -298,7 +298,7 @@ h6 {
 }
 
 .fs-window-bar-module-window-bar::before {
-    content: "RHINE LAB\A ANALYSIS OS" !important;
+    content: "RHINE" !important;
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -1595,18 +1595,6 @@ body::after {
     background-color: var(--r-accent) !important;
 }
 
-.fs-page-header-module-container h1::before,
-.fs-page-header-module-container .fs-page-header-module-title::before {
-    content: "INTERNAL DATABASE \FF0F " !important;
-    margin-right: 10px !important;
-    color: var(--r-muted) !important;
-    font-family: var(--r-font-medium) !important;
-    font-size: 9px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.16em !important;
-    vertical-align: 1px !important;
-}
-
 .fs-page-header-module-container h1,
 .fs-page-header-module-container .fs-page-header-module-title {
     animation: rhine-decrypt 820ms cubic-bezier(0.22, 1, 0.36, 1) 1 both !important;
@@ -2068,6 +2056,91 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
 
 h1.fs-feature-carousel-module-title {
     text-shadow: none !important;
+}
+
+/* --- the carousel arrows sit in the banner's field, beside the figure, on
+   the archive's own plates: the app drops them over the artwork and inks the
+   glyph for a dark cover, which a paper theme has to correct -------------- */
+.fs-feature-carousel-module-nav-arrow-left,
+.fs-feature-carousel-module-nav-arrow-right {
+    color: var(--r-fg) !important;
+    background-color: var(--r-panel) !important;
+    border: 1px solid var(--r-hair) !important;
+    border-radius: 0 !important;
+}
+
+.fs-feature-carousel-module-nav-arrow-left {
+    top: auto !important;
+    bottom: 10px !important;
+    right: 64px !important;
+    left: auto !important;
+}
+
+.fs-feature-carousel-module-nav-arrow-right {
+    top: auto !important;
+    bottom: 10px !important;
+    right: 20px !important;
+    left: auto !important;
+}
+
+.fs-feature-carousel-module-nav-arrow-left svg,
+.fs-feature-carousel-module-nav-arrow-right svg {
+    color: var(--r-fg) !important;
+    fill: var(--r-fg) !important;
+}
+
+.fs-feature-carousel-module-nav-arrow-left:hover,
+.fs-feature-carousel-module-nav-arrow-right:hover {
+    color: var(--r-bg) !important;
+    background-color: var(--r-fg) !important;
+}
+
+.fs-feature-carousel-module-nav-arrow-left:hover svg,
+.fs-feature-carousel-module-nav-arrow-right:hover svg {
+    color: var(--r-bg) !important;
+    fill: var(--r-bg) !important;
+}
+
+/* the play affordances on the banner are plates too, never white discs on
+   the artwork ------------------------------------------------------------ */
+.fs-feature-carousel-module-play-button-overlay .fs-play-button-module-play-button[data-variant='filled'],
+.fs-feature-carousel-module-play-button-overlay .fs-play-button-module-play-button.fs-play-button-module-fill {
+    color: var(--r-bg) !important;
+    background-color: var(--r-fg) !important;
+    border-radius: 0 !important;
+}
+
+.fs-feature-carousel-module-play-button-overlay .fs-play-button-module-play-button[data-variant='subtle'],
+.fs-feature-carousel-module-play-button-overlay .fs-play-button-module-play-button.fs-play-button-module-secondary {
+    color: var(--r-fg) !important;
+    background-color: var(--r-panel) !important;
+    border: 1px solid var(--r-hair) !important;
+    border-radius: 0 !important;
+}
+
+.fs-feature-carousel-module-play-button-overlay svg {
+    color: inherit !important;
+    fill: currentColor !important;
+}
+
+/* the header's text buttons (play, skip, last) follow the page's ink: the app
+   inks them white for a cover-derived backdrop the theme never draws ------- */
+.fs-play-button-module-wide-text-button {
+    color: var(--r-fg) !important;
+}
+
+.fs-play-button-module-wide-text-button svg {
+    color: var(--r-fg) !important;
+    fill: var(--r-fg) !important;
+}
+
+.fs-play-button-module-wide-text-button.fs-play-button-module-wide-text-button:hover {
+    color: var(--r-accent) !important;
+}
+
+.fs-play-button-module-wide-text-button:hover svg {
+    color: var(--r-accent) !important;
+    fill: var(--r-accent) !important;
 }
 
 /* the artist line and the format tags step down to the muted tone — the app
