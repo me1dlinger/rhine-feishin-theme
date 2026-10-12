@@ -16,27 +16,29 @@ Feishin 的原生主题包。五套配色,每套含浅色与深色两种,共十�
 
 ### 主页
 
-![主页](screenshots/1.png)
+![主页-MULTIPLE](screenshots/1.png)
+
+![主页-SINGLE](screenshots/2.png)
 
 ### 搜索
 
-![搜索](screenshots/2.png)
+![搜索](screenshots/3.png)
 
 ### 设置页
 
-![设置页](screenshots/3.png)
+![设置页](screenshots/4.png)
 
 ### 曲目列表页
 
-![曲目列表页](screenshots/4.png)
+![曲目列表页](screenshots/5.png)
 
 ### 专辑列表页
 
-![专辑列表页](screenshots/5.png)
+![专辑列表页](screenshots/6.png)
 
 ### 播放页
 
-![播放页](screenshots/6.png)
+![播放页](screenshots/7.png)
 
 ## 安装
 
@@ -107,3 +109,7 @@ screenshots/                   界面截图
 ## 许可
 
 - Geist Mono: SIL Open Font License 1.1,见 `themes/fonts/OFL.txt`。
+
+## 参考
+
+部分设计参考自 [RhinE](https://github.com/ericzhang12111-cell/RhinE)
