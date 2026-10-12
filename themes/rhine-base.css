@@ -2056,14 +2056,14 @@ h5.fs-feature-carousel-module-title,
     background-color: color-mix(in srgb, var(--r-fg) 80%, transparent) !important;
     -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEwLjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0gLTE3Ljg5IC0xNy43NSBBIDI1LjAwIDI1LjAwIDAgMCAwIC02MC41MCAwLjAwIEEgMjUuMDAgMjUuMDAgMCAwIDAgLTE3Ljg5IDE3Ljc1IEwgMTcuODkgLTE3Ljc1IEEgMjUuMDAgMjUuMDAgMCAwIDEgNjAuNTAgMC4wMCBBIDI1LjAwIDI1LjAwIDAgMCAxIDE3Ljg5IDE3Ljc1IFoiLz4+PC9nPjwvc3ZnPg==") !important;
     mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEwLjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0gLTE3Ljg5IC0xNy43NSBBIDI1LjAwIDI1LjAwIDAgMCAwIC02MC41MCAwLjAwIEEgMjUuMDAgMjUuMDAgMCAwIDAgLTE3Ljg5IDE3Ljc1IEwgMTcuODkgLTE3Ljc1IEEgMjUuMDAgMjUuMDAgMCAwIDEgNjAuNTAgMC4wMCBBIDI1LjAwIDI1LjAwIDAgMCAxIDE3Ljg5IDE3Ljc1IFoiLz4+PC9nPjwvc3ZnPg==") !important;
-    -webkit-mask-position: calc(50% + 2px) calc(50% + 6px) !important;
-    mask-position: calc(50% + 2px) calc(50% + 6px) !important;
+    -webkit-mask-position: calc(50% + 1px) calc(50% + 3px) !important;
+    mask-position: calc(50% + 1px) calc(50% + 3px) !important;
     -webkit-mask-repeat: no-repeat !important;
     mask-repeat: no-repeat !important;
     -webkit-mask-size: contain !important;
     mask-size: contain !important;
-    filter: blur(6px) !important;
-    opacity: 0.2 !important;
+    filter: blur(5px) !important;
+    opacity: 0.15 !important;
 }
 
 /* the body: solid, shaded from the lit side to the shadowed one ----------- */
@@ -2106,12 +2106,12 @@ h5.fs-feature-carousel-module-title,
     margin-top: -54px !important;
     pointer-events: none !important;
     animation: none !important;
-    background-color: color-mix(in srgb, var(--r-bg) 95%, var(--r-fg)) !important;
+    background-color: color-mix(in srgb, var(--r-fg) 55%, var(--r-bg)) !important;
     box-shadow: none !important;
-    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjUuNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTSAtMTcuODkgLTE3Ljc1IEEgMjUuMDAgMjUuMDAgMCAwIDAgLTYwLjUwIDAuMDAgQSAyNS4wMCAyNS4wMCAwIDAgMCAtMTcuODkgMTcuNzUgTCAxNy44OSAtMTcuNzUgQSAyNS4wMCAyNS4wMCAwIDAgMSA2MC41MCAwLjAwIEEgMjUuMDAgMjUuMDAgMCAwIDEgMTcuODkgMTcuNzUgWiIvPj48L2c+PC9zdmc+") !important;
-    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjUuNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTSAtMTcuODkgLTE3Ljc1IEEgMjUuMDAgMjUuMDAgMCAwIDAgLTYwLjUwIDAuMDAgQSAyNS4wMCAyNS4wMCAwIDAgMCAtMTcuODkgMTcuNzUgTCAxNy44OSAtMTcuNzUgQSAyNS4wMCAyNS4wMCAwIDAgMSA2MC41MCAwLjAwIEEgMjUuMDAgMjUuMDAgMCAwIDEgMTcuODkgMTcuNzUgWiIvPj48L2c+PC9zdmc+") !important;
-    -webkit-mask-position: calc(50% - 1.5px) calc(50% - 1.5px) !important;
-    mask-position: calc(50% - 1.5px) calc(50% - 1.5px) !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjQuNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTSAtMTcuODkgLTE3Ljc1IEEgMjUuMDAgMjUuMDAgMCAwIDAgLTYwLjUwIDAuMDAgQSAyNS4wMCAyNS4wMCAwIDAgMCAtMTcuODkgMTcuNzUgTCAxNy44OSAtMTcuNzUgQSAyNS4wMCAyNS4wMCAwIDAgMSA2MC41MCAwLjAwIEEgMjUuMDAgMjUuMDAgMCAwIDEgMTcuODkgMTcuNzUgWiIvPj48L2c+PC9zdmc+") !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjQuNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTSAtMTcuODkgLTE3Ljc1IEEgMjUuMDAgMjUuMDAgMCAwIDAgLTYwLjUwIDAuMDAgQSAyNS4wMCAyNS4wMCAwIDAgMCAtMTcuODkgMTcuNzUgTCAxNy44OSAtMTcuNzUgQSAyNS4wMCAyNS4wMCAwIDAgMSA2MC41MCAwLjAwIEEgMjUuMDAgMjUuMDAgMCAwIDEgMTcuODkgMTcuNzUgWiIvPj48L2c+PC9zdmc+") !important;
+    -webkit-mask-position: center !important;
+    mask-position: center !important;
     -webkit-mask-repeat: no-repeat !important;
     mask-repeat: no-repeat !important;
     -webkit-mask-size: contain !important;
