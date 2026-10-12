@@ -1960,6 +1960,17 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
     background-color: var(--r-fg) !important;
 }
 
+/* --- the hero caption sits over whatever artwork is featured, and a dark
+   cover swallows a dark title. It takes the page's own ground as a plate,
+   railed with the accent, so it reads over a black cover and a white one
+   alike ---------------------------------------------------------------- */
+.fs-feature-carousel-module-metadata-section > .mantine-Stack-root {
+    padding: 10px 18px 10px 14px !important;
+    border-left: 2px solid var(--r-accent) !important;
+    background-color: var(--r-bg) !important;
+    box-shadow: none !important;
+}
+
 /* --- the queue and now-playing lists step down to the ground, so a filled
    plate stays the only raised surface ----------------------------------- */
 .fs-sidebar-play-queue-module-queue-container,
