@@ -1964,14 +1964,18 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
    the field the banner leaves at its right. The app's blurred cover behind
    the banner is dropped — one image is enough — and the cover keeps a
    hairline instead of a glow. The figure is the one the window bar carries,
-   drawn as the reference draws it in 2D:
+   built the way the reference builds it in 2D:
 
-     tube      two circles r=1 at +/-1.42 joined by the inner tangents, the
-               front branch whole and the back broken where the front passes
-               over it; tinted with --r-fg as a watermark, breathing
-     channel   the same centreline as a fine accent line, carrying the light
-               ring.js sends along it: two arcs sweeping the figure once per
-               28 s, against the 29 s lap the reference gives its gap
+     tube      two circles r=1 at +/-1.42 joined by the inner tangents. The
+               front branch runs whole; the back one is broken by a hair more
+               than the tube is wide, so the crossing reads as one band
+               passing OVER the other rather than two rings touching
+     body      a shaded, solid tube — never a hairline: a diagonal ramp from
+               the lit side to the shadowed side, a lit bevel edge offset up
+               and left, and a blurred copy dropped down and right
+     channel   the accent centreline, carrying the light ring.js sends along
+               it: two arcs sweeping the figure once per 28 s, against the
+               29 s lap the reference gives its gap
      dust      two rings of archive marks turning against each other
      divide    the field is parted from the caption by the usual hairline
      place     under the content, pointer-events none, and hidden as soon as
@@ -2011,7 +2015,7 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
 
 .fs-feature-carousel-module-content {
     position: relative !important;
-    z-index: 1 !important;
+    z-index: 10 !important;
 }
 
 .fs-feature-carousel-module-metadata-section {
@@ -2037,44 +2041,98 @@ h5.fs-feature-carousel-module-title,
     color: var(--r-muted) !important;
 }
 
+/* the tube's own shadow: a blurred copy dropped down and right ------------ */
 .fs-feature-carousel-module-carousel-item::before {
     content: "" !important;
     position: absolute !important;
     left: calc(100% - 262px) !important;
     top: 50% !important;
-    z-index: 0 !important;
+    z-index: 1 !important;
     width: 224px !important;
     height: 107px !important;
     margin-top: -54px !important;
     pointer-events: none !important;
+    animation: none !important;
+    background-color: color-mix(in srgb, var(--r-fg) 80%, transparent) !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTExLjAwIiB5Mj0iMTAuOTIiLz48bGluZSB4MT0iMTEuMDAiIHkxPSItMTAuOTIiIHgyPSIxNy44OSIgeTI9Ii0xNy43NSIvPjwvZz48L3N2Zz4=") !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTExLjAwIiB5Mj0iMTAuOTIiLz48bGluZSB4MT0iMTEuMDAiIHkxPSItMTAuOTIiIHgyPSIxNy44OSIgeTI9Ii0xNy43NSIvPjwvZz48L3N2Zz4=") !important;
+    -webkit-mask-position: calc(50% + 2px) calc(50% + 6px) !important;
+    mask-position: calc(50% + 2px) calc(50% + 6px) !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+    filter: blur(6px) !important;
+    opacity: 0.2 !important;
+}
+
+/* the body: solid, shaded from the lit side to the shadowed one ----------- */
+.fs-feature-carousel-module-carousel-item::after {
+    content: "" !important;
+    position: absolute !important;
+    left: calc(100% - 262px) !important;
+    top: 50% !important;
+    z-index: 2 !important;
+    width: 224px !important;
+    height: 107px !important;
+    margin-top: -54px !important;
+    pointer-events: none !important;
+    animation: none !important;
     background-color: transparent !important;
-    background-image: linear-gradient(150deg, var(--r-fg-soft) 0%, var(--r-fg) 100%) !important;
-    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTguODciIHkyPSI4LjgwIi8+PGxpbmUgeDE9IjguODciIHkxPSItOC44MCIgeDI9IjE3Ljg5IiB5Mj0iLTE3Ljc1Ii8+PC9nPjwvc3ZnPg==") !important;
-    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTguODciIHkyPSI4LjgwIi8+PGxpbmUgeDE9IjguODciIHkxPSItOC44MCIgeDI9IjE3Ljg5IiB5Mj0iLTE3Ljc1Ii8+PC9nPjwvc3ZnPg==") !important;
+    background-image: linear-gradient(152deg,
+        color-mix(in srgb, var(--r-fg) 26%, var(--r-bg)) 0%,
+        color-mix(in srgb, var(--r-fg) 54%, var(--r-bg)) 52%,
+        color-mix(in srgb, var(--r-fg) 78%, var(--r-bg)) 100%) !important;
+    box-shadow: none !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTExLjAwIiB5Mj0iMTAuOTIiLz48bGluZSB4MT0iMTEuMDAiIHkxPSItMTAuOTIiIHgyPSIxNy44OSIgeTI9Ii0xNy43NSIvPjwvZz48L3N2Zz4=") !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTExLjAwIiB5Mj0iMTAuOTIiLz48bGluZSB4MT0iMTEuMDAiIHkxPSItMTAuOTIiIHgyPSIxNy44OSIgeTI9Ii0xNy43NSIvPjwvZz48L3N2Zz4=") !important;
     -webkit-mask-position: center !important;
     mask-position: center !important;
     -webkit-mask-repeat: no-repeat !important;
     mask-repeat: no-repeat !important;
     -webkit-mask-size: contain !important;
     mask-size: contain !important;
-    opacity: 0.22 !important;
-    animation: rhine-breathe 16s ease-in-out infinite alternate !important;
 }
 
-.fs-feature-carousel-module-carousel-item::after {
+/* the lit bevel along the tube's upper left, set in against the body ------- */
+.fs-feature-carousel-module-content::before {
     content: "" !important;
     position: absolute !important;
     left: calc(100% - 262px) !important;
     top: 50% !important;
-    z-index: 0 !important;
+    z-index: 3 !important;
+    width: 224px !important;
+    height: 107px !important;
+    margin-top: -54px !important;
+    pointer-events: none !important;
+    animation: none !important;
+    background-color: color-mix(in srgb, var(--r-bg) 95%, var(--r-fg)) !important;
+    box-shadow: none !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjguNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iLTM1LjUwIiBjeT0iMC4wMCIgcj0iMjUuMDAiLz48Y2lyY2xlIGN4PSIzNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9Ii0xNy43NSIgeDI9IjE3Ljg5IiB5Mj0iMTcuNzUiLz48bGluZSB4MT0iLTE3Ljg5IiB5MT0iMTcuNzUiIHgyPSItMTEuMDAiIHkyPSIxMC45MiIvPjxsaW5lIHgxPSIxMS4wMCIgeTE9Ii0xMC45MiIgeDI9IjE3Ljg5IiB5Mj0iLTE3Ljc1Ii8+PC9nPjwvc3ZnPg==") !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjguNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iLTM1LjUwIiBjeT0iMC4wMCIgcj0iMjUuMDAiLz48Y2lyY2xlIGN4PSIzNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9Ii0xNy43NSIgeDI9IjE3Ljg5IiB5Mj0iMTcuNzUiLz48bGluZSB4MT0iLTE3Ljg5IiB5MT0iMTcuNzUiIHgyPSItMTEuMDAiIHkyPSIxMC45MiIvPjxsaW5lIHgxPSIxMS4wMCIgeTE9Ii0xMC45MiIgeDI9IjE3Ljg5IiB5Mj0iLTE3Ljc1Ii8+PC9nPjwvc3ZnPg==") !important;
+    -webkit-mask-position: calc(50% - 1.5px) calc(50% - 1.5px) !important;
+    mask-position: calc(50% - 1.5px) calc(50% - 1.5px) !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+}
+
+.fs-feature-carousel-module-content::after {
+    content: "" !important;
+    position: absolute !important;
+    left: calc(100% - 262px) !important;
+    top: 50% !important;
+    z-index: 4 !important;
     width: 224px !important;
     height: 107px !important;
     margin-top: -54px !important;
     pointer-events: none !important;
     background-image:
     conic-gradient(from var(--rhine-angle) at 50% 50%, transparent 0deg, var(--r-accent) 9deg, transparent 30deg, transparent 172deg, var(--r-accent) 181deg, transparent 202deg),
-    linear-gradient(color-mix(in srgb, var(--r-accent) 42%, transparent) 0 0) !important;
+    linear-gradient(color-mix(in srgb, var(--r-accent) 40%, transparent) 0 0) !important;
     background-repeat: no-repeat !important;
+    box-shadow: none !important;
     -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNzUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iLTM1LjUwIiBjeT0iMC4wMCIgcj0iMjUuMDAiLz48Y2lyY2xlIGN4PSIzNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9Ii0xNy43NSIgeDI9IjE3Ljg5IiB5Mj0iMTcuNzUiLz48bGluZSB4MT0iLTE3Ljg5IiB5MT0iMTcuNzUiIHgyPSItOC44NyIgeTI9IjguODAiLz48bGluZSB4MT0iOC44NyIgeTE9Ii04LjgwIiB4Mj0iMTcuODkiIHkyPSItMTcuNzUiLz48L2c+PC9zdmc+") !important;
     mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNzUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iLTM1LjUwIiBjeT0iMC4wMCIgcj0iMjUuMDAiLz48Y2lyY2xlIGN4PSIzNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9Ii0xNy43NSIgeDI9IjE3Ljg5IiB5Mj0iMTcuNzUiLz48bGluZSB4MT0iLTE3Ljg5IiB5MT0iMTcuNzUiIHgyPSItOC44NyIgeTI9IjguODAiLz48bGluZSB4MT0iOC44NyIgeTE9Ii04LjgwIiB4Mj0iMTcuODkiIHkyPSItMTcuNzUiLz48L2c+PC9zdmc+") !important;
     -webkit-mask-position: center !important;
@@ -2086,47 +2144,47 @@ h5.fs-feature-carousel-module-title,
     animation: rhine-sweep 28s linear infinite !important;
 }
 
-.fs-feature-carousel-module-content::before {
+.fs-feature-carousel-module-metadata-section::before {
     content: "" !important;
     position: absolute !important;
     left: calc(100% - 150px) !important;
     top: 50% !important;
-    z-index: 0 !important;
+    z-index: 5 !important;
     width: 4px !important;
     height: 4px !important;
     margin: -2px 0 0 -2px !important;
     pointer-events: none !important;
     background-color: transparent !important;
     box-shadow:
-    92px 0 0 1px color-mix(in srgb, var(--r-fg) 40%, transparent),
-    65px -51px 0 0 color-mix(in srgb, var(--r-accent) 60%, transparent),
-    0 -51px 0 1px color-mix(in srgb, var(--r-fg) 26%, transparent),
-    -65px -51px 0 0 color-mix(in srgb, var(--r-fg) 34%, transparent),
-    -92px 0 0 1px color-mix(in srgb, var(--r-accent) 45%, transparent),
-    -65px 51px 0 0 color-mix(in srgb, var(--r-fg) 30%, transparent),
-    0 51px 0 1px color-mix(in srgb, var(--r-fg) 22%, transparent),
-    65px 51px 0 0 color-mix(in srgb, var(--r-accent) 40%, transparent) !important;
+    78px 0 0 1px color-mix(in srgb, var(--r-fg) 42%, transparent),
+    55px -44px 0 0 color-mix(in srgb, var(--r-accent) 62%, transparent),
+    0 -44px 0 1px color-mix(in srgb, var(--r-fg) 28%, transparent),
+    -55px -44px 0 0 color-mix(in srgb, var(--r-fg) 36%, transparent),
+    -78px 0 0 1px color-mix(in srgb, var(--r-accent) 46%, transparent),
+    -55px 44px 0 0 color-mix(in srgb, var(--r-fg) 32%, transparent),
+    0 44px 0 1px color-mix(in srgb, var(--r-fg) 24%, transparent),
+    55px 44px 0 0 color-mix(in srgb, var(--r-accent) 42%, transparent) !important;
     animation: rhine-turn 46s linear infinite, rhine-dust 11s ease-in-out infinite alternate !important;
 }
 
-.fs-feature-carousel-module-content::after {
+.fs-feature-carousel-module-metadata-section::after {
     content: "" !important;
     position: absolute !important;
     left: calc(100% - 150px) !important;
     top: 50% !important;
-    z-index: 0 !important;
+    z-index: 5 !important;
     width: 3px !important;
     height: 3px !important;
     margin: -1.5px 0 0 -1.5px !important;
     pointer-events: none !important;
     background-color: transparent !important;
     box-shadow:
-    132px 0 0 0 color-mix(in srgb, var(--r-fg) 20%, transparent),
-    66px -78px 0 0 color-mix(in srgb, var(--r-accent) 30%, transparent),
-    -66px -78px 0 0 color-mix(in srgb, var(--r-fg) 24%, transparent),
-    -132px 0 0 0 color-mix(in srgb, var(--r-accent) 26%, transparent),
-    66px 78px 0 0 color-mix(in srgb, var(--r-fg) 18%, transparent),
-    -66px 78px 0 0 color-mix(in srgb, var(--r-fg) 22%, transparent) !important;
+    118px 0 0 0 color-mix(in srgb, var(--r-fg) 22%, transparent),
+    59px -70px 0 0 color-mix(in srgb, var(--r-accent) 32%, transparent),
+    -59px -70px 0 0 color-mix(in srgb, var(--r-fg) 26%, transparent),
+    -118px 0 0 0 color-mix(in srgb, var(--r-accent) 28%, transparent),
+    59px 70px 0 0 color-mix(in srgb, var(--r-fg) 20%, transparent),
+    -59px 70px 0 0 color-mix(in srgb, var(--r-fg) 24%, transparent) !important;
     animation: rhine-turn 92s linear infinite reverse, rhine-dust 17s ease-in-out infinite alternate !important;
 }
 
@@ -2156,7 +2214,9 @@ h5.fs-feature-carousel-module-title,
     .fs-feature-carousel-module-carousel-item::before,
     .fs-feature-carousel-module-carousel-item::after,
     .fs-feature-carousel-module-content::before,
-    .fs-feature-carousel-module-content::after {
+    .fs-feature-carousel-module-content::after,
+    .fs-feature-carousel-module-metadata-section::before,
+    .fs-feature-carousel-module-metadata-section::after {
         display: none !important;
     }
 }
@@ -2166,7 +2226,9 @@ h5.fs-feature-carousel-module-title,
     .fs-feature-carousel-module-carousel-item::before,
     .fs-feature-carousel-module-carousel-item::after,
     .fs-feature-carousel-module-content::before,
-    .fs-feature-carousel-module-content::after {
+    .fs-feature-carousel-module-content::after,
+    .fs-feature-carousel-module-metadata-section::before,
+    .fs-feature-carousel-module-metadata-section::after {
         animation: none !important;
     }
 }
