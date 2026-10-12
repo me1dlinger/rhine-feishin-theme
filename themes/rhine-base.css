@@ -2134,6 +2134,16 @@ h1.fs-feature-carousel-module-title {
 
 .fs-play-button-module-wide-text-button.fs-play-button-module-wide-text-button:hover {
     color: var(--r-accent) !important;
+    background-color: var(--r-case) !important;
+}
+
+/* the app's unthemed treatment paints its own plate on hover with an
+   important rule of equal rank, so the plate is restated one qualifier up
+   -------------------------------------------------------------------------- */
+[data-mantine-color-scheme='light'] .fs-play-button-module-wide-text-button.fs-play-button-module-wide-text-button.fs-play-button-module-unthemed:hover,
+[data-mantine-color-scheme='dark'] .fs-play-button-module-wide-text-button.fs-play-button-module-wide-text-button.fs-play-button-module-unthemed:hover {
+    color: var(--r-accent) !important;
+    background-color: var(--r-case) !important;
 }
 
 .fs-play-button-module-wide-text-button:hover svg {
