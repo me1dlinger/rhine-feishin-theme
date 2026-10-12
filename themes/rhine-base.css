@@ -2601,9 +2601,16 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
     to { opacity: 1; }
 }
 
-/* the equipment bays slide rather than snap */
+/* the equipment bays snap. This port gave the app shell a 380 ms
+   grid-template-columns spring so a collapsed sidebar slid instead of
+   jumping; the shell's middle column is the 1fr that the window and the
+   sidebar's own drag handle both drive, so the spring fired on every step of
+   either — the whole content area (the artwork with it) spent the drag
+   chasing the pointer, which reads as dropped frames. The bays follow the
+   pointer now; the app's own width for them is instant, and this port has no
+   reason to be slower than the app. ------------------------------------- */
 .fs-main-content-module-main-content-container {
-    transition: grid-template-columns 380ms var(--r-spring) !important;
+    transition: none !important;
 }
 
 /* menus, popovers and modals open on the hard spring */
@@ -2625,12 +2632,14 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
 
 
 
-/* --- the playing plate: crop brackets, corner marks, index tab and axis ---
+/* --- the playing plate: crop brackets, corner marks and the index tab ----
    A percentage in background-position positions the layer, not the box edge
    it is measured from, so both sides of every mark use the same rule: the
    layer's far edge sits INS from the box's far edge. The frame overhangs by
-   20px and marks start at 13px, leaving a 7px gap, so nothing lands
-   on the artwork. The axis stops 7px short of the plate as a drafting break. ------- */
+   20px and marks start at 13px, leaving a 7px gap, so nothing lands on the
+   artwork. The pair of axes that used to run out of the frame is gone: it was
+   laid out in a fixed 86px gutter, which the window takes away as it narrows -
+   the left axis left the screen and the right one ran into the transcript. */
 .fs-full-screen-player-image-module-image-container::before {
     content: "" !important;
     position: absolute !important;
@@ -2641,18 +2650,6 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
     background-position: 13px 13px, 13px 13px, calc(100% - 13px) 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), 13px 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(50% - 13px) 17px !important;
     background-repeat: no-repeat !important;
     background-size: 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 6px 6px, 6px 6px, 6px 6px, 6px 6px, 26px 3px !important;
-}
-
-.fs-full-screen-player-image-module-image-container::after {
-    content: "" !important;
-    position: absolute !important;
-    inset: -20px -86px !important;
-    z-index: 3 !important;
-    pointer-events: none !important;
-    background-image: linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg) 0 0), linear-gradient(var(--r-fg) 0 0) !important;
-    background-position: 5px calc(50% - 1px), calc(100% - 5px) calc(50% - 1px), 0px calc(50% - 3px), calc(100% - 5px) calc(50% - 3px) !important;
-    background-repeat: no-repeat !important;
-    background-size: 74px 1px, 74px 1px, 5px 5px, 5px 5px !important;
 }
 
 /* --- an inverted plate keeps its ink when hovered -------------------------
@@ -2951,29 +2948,13 @@ body::before {
     transition: transform 200ms var(--r-spring), border-color 200ms var(--r-spring), background-color 200ms var(--r-spring) !important;
 }
 
-/* --- the grain is re-seeded twelve times a second rather than drifting:
-   fx.js repaints its tile at 12 Hz, and a transform jump on a seamless tile
-   is that same picture for the price of one composited layer ------------- */
+/* --- the grain holds still. fx.js re-seeds its tile at 12 Hz, and this port
+   did the same with a stepped transform on a full-screen layer; measured over
+   a window resize that animation was 61 % of the frame budget in the full
+   screen player (761 ms of work for 20 steps, 156 ms without it), for a
+   shimmer nobody watches. The tile stays, the re-seed does not. ---------- */
 body::after {
     inset: -24px !important;
-    will-change: transform !important;
-    animation: rhine-grain 1s steps(1, end) infinite !important;
-}
-
-@keyframes rhine-grain {
-    0% { transform: translate3d(0, 0, 0); }
-    8% { transform: translate3d(-7px, -4px, 0); }
-    17% { transform: translate3d(5px, -12px, 0); }
-    25% { transform: translate3d(-11px, 7px, 0); }
-    33% { transform: translate3d(9px, 3px, 0); }
-    42% { transform: translate3d(-3px, 11px, 0); }
-    50% { transform: translate3d(12px, -6px, 0); }
-    58% { transform: translate3d(-8px, -14px, 0); }
-    67% { transform: translate3d(3px, 8px, 0); }
-    75% { transform: translate3d(-12px, -2px, 0); }
-    83% { transform: translate3d(7px, 12px, 0); }
-    92% { transform: translate3d(-5px, 5px, 0); }
-    100% { transform: translate3d(0, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2983,13 +2964,14 @@ body::after {
         display: none !important;
     }
 
-    body::after,
     .fs-animated-page-module-animated-page::after,
     body:has(.player-state-playing) .song-title,
     body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
         animation: none !important;
     }
-}/* ==========================================================================
+}
+
+/* ==========================================================================
    DEVICES · part four — THE FULL SCREEN PAGE
    The full screen player is the archive's reading room: the artwork plate on
    the left, the transcript on the right, both on the same paper as every
@@ -3011,6 +2993,21 @@ body::after {
 .fs-full-screen-player-module-container {
     background-color: var(--r-bg) !important;
     background-image: none !important;
+}
+
+/* the artwork carries a rule, never a glow: the app drops a 15px shadow on
+   it, which is both off language and expensive to re-raster on every resize - */
+.fs-full-screen-player-image-module-image,
+.fs-full-screen-player-image-module-image-container {
+    filter: none !important;
+    box-shadow: none !important;
+}
+
+/* the split between the artwork and the transcript is the app's, and it drives
+   the column's WIDTH: a 500 ms width transition fires on every step of a window
+   resize, so the plate chases the window edge and lands in two jumps -------- */
+.fs-full-screen-player-module-image-column {
+    transition: none !important;
 }
 
 .fs-full-screen-player-module-background-overlay,
