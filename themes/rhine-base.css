@@ -1960,15 +1960,39 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
     background-color: var(--r-fg) !important;
 }
 
-/* --- the hero caption sits over whatever artwork is featured, and a dark
-   cover swallows a dark title. It takes the page's own ground as a plate,
-   railed with the accent, so it reads over a black cover and a white one
-   alike ---------------------------------------------------------------- */
-.fs-feature-carousel-module-metadata-section > .mantine-Stack-root {
-    padding: 10px 18px 10px 14px !important;
-    border-left: 2px solid var(--r-accent) !important;
-    background-color: var(--r-bg) !important;
+/* --- the hero wears no blurred cover: the artwork is the plate, so the
+   banner is a field on the panel step inside the archive's hairline, and its
+   caption reads on the page's own ground whatever the cover is ----------- */
+.fs-feature-carousel-module-blurred-background,
+.fs-feature-carousel-module-carousel-item .fs-library-background-overlay-module-background-overlay {
+    display: none !important;
+}
+
+.fs-feature-carousel-module-carousel-item {
+    background-color: var(--r-panel) !important;
+    border: 1px solid var(--r-hair) !important;
     box-shadow: none !important;
+}
+
+/* the cover carried a drop shadow to float over the blur; on a flat field the
+   archive frames artwork with a rule, never a glow ----------------------- */
+.fs-feature-carousel-module-album-image-container {
+    filter: none !important;
+    box-shadow: none !important;
+}
+
+.fs-feature-carousel-module-metadata-section > .mantine-Stack-root {
+    padding: 0 !important;
+    border: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* the artist line and the format tags step down to the muted tone — the app
+   inks them for a dark cover, and a light ground swallows white text ------ */
+h5.fs-feature-carousel-module-title,
+.fs-feature-carousel-module-metadata-section .fs-text-module-root {
+    color: var(--r-muted) !important;
 }
 
 /* --- the queue and now-playing lists step down to the ground, so a filled
