@@ -2132,6 +2132,16 @@ h1.fs-feature-carousel-module-title {
     fill: var(--r-fg) !important;
 }
 
+/* the label is its own span with its own colour, so the button's ink never
+   reached it: the app writes #fff there for a dark cover ------------------ */
+.fs-play-button-module-wide-text-button-label {
+    color: var(--r-fg) !important;
+}
+
+.fs-play-button-module-wide-text-button:hover .fs-play-button-module-wide-text-button-label {
+    color: var(--r-accent) !important;
+}
+
 .fs-play-button-module-wide-text-button.fs-play-button-module-wide-text-button:hover {
     color: var(--r-accent) !important;
     background-color: var(--r-case) !important;
