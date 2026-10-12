@@ -2058,28 +2058,24 @@ h1.fs-feature-carousel-module-title {
     text-shadow: none !important;
 }
 
-/* --- the carousel arrows sit in the banner's field, beside the figure, on
-   the archive's own plates: the app drops them over the artwork and inks the
-   glyph for a dark cover, which a paper theme has to correct -------------- */
+/* --- the carousel arrows flank the cover-and-caption group, one in the
+   gutter before the artwork and one just short of the field divider, and the
+   figure's field is left alone. They keep the app's bare glyph; only the ink
+   is stated, because the app picks it for a dark cover -------------------- */
 .fs-feature-carousel-module-nav-arrow-left,
 .fs-feature-carousel-module-nav-arrow-right {
+    background-color: transparent !important;
+    border: 0 !important;
     color: var(--r-fg) !important;
-    background-color: var(--r-panel) !important;
-    border: 1px solid var(--r-hair) !important;
-    border-radius: 0 !important;
 }
 
 .fs-feature-carousel-module-nav-arrow-left {
-    top: auto !important;
-    bottom: 10px !important;
-    right: 64px !important;
-    left: auto !important;
+    left: -13px !important;
+    right: auto !important;
 }
 
 .fs-feature-carousel-module-nav-arrow-right {
-    top: auto !important;
-    bottom: 10px !important;
-    right: 20px !important;
+    right: 323px !important;
     left: auto !important;
 }
 
@@ -2091,14 +2087,14 @@ h1.fs-feature-carousel-module-title {
 
 .fs-feature-carousel-module-nav-arrow-left:hover,
 .fs-feature-carousel-module-nav-arrow-right:hover {
-    color: var(--r-bg) !important;
-    background-color: var(--r-fg) !important;
+    color: var(--r-accent) !important;
+    background-color: transparent !important;
 }
 
 .fs-feature-carousel-module-nav-arrow-left:hover svg,
 .fs-feature-carousel-module-nav-arrow-right:hover svg {
-    color: var(--r-bg) !important;
-    fill: var(--r-bg) !important;
+    color: var(--r-accent) !important;
+    fill: var(--r-accent) !important;
 }
 
 /* the play affordances on the banner are plates too, never white discs on
@@ -2124,8 +2120,10 @@ h1.fs-feature-carousel-module-title {
 }
 
 /* the header's text buttons (play, skip, last) follow the page's ink: the app
-   inks them white for a cover-derived backdrop the theme never draws ------- */
-.fs-play-button-module-wide-text-button {
+   inks them white for a cover-derived backdrop the theme never draws. The
+   selector is doubled because the theme's own subtle-variant rule, which sets
+   them to the muted tone, is heavier than a single class ------------------- */
+.fs-play-button-module-wide-text-button.fs-play-button-module-wide-text-button {
     color: var(--r-fg) !important;
 }
 
