@@ -1960,32 +1960,74 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
     background-color: var(--r-fg) !important;
 }
 
-/* --- the hero wears no blurred cover: the artwork is the plate, so the
-   banner is a field on the panel step inside the archive's hairline, and its
-   caption reads on the page's own ground whatever the cover is ----------- */
+/* --- the hero: the artwork is the plate, and the archive's infinity rides
+   the field the banner leaves at its right. The app's blurred cover behind
+   the banner is dropped — one image is enough — and the cover keeps a
+   hairline instead of a glow. The figure is the one the window bar carries,
+   drawn as the reference draws it in 2D:
+
+     tube      two circles r=1 at +/-1.42 joined by the inner tangents, the
+               front branch whole and the back broken where the front passes
+               over it; tinted with --r-fg as a watermark, breathing
+     channel   the same centreline as a fine accent line, carrying the light
+               ring.js sends along it: two arcs sweeping the figure once per
+               28 s, against the 29 s lap the reference gives its gap
+     dust      two rings of archive marks turning against each other
+     divide    the field is parted from the caption by the usual hairline
+     place     under the content, pointer-events none, and hidden as soon as
+               the sheet cannot spare the room
+   ------------------------------------------------------------------------ */
 .fs-feature-carousel-module-blurred-background,
 .fs-feature-carousel-module-carousel-item .fs-library-background-overlay-module-background-overlay {
     display: none !important;
 }
 
 .fs-feature-carousel-module-carousel-item {
-    background-color: var(--r-panel) !important;
-    border: 1px solid var(--r-hair) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+    border: 0 !important;
     box-shadow: none !important;
+    background-image:
+    linear-gradient(var(--r-hair) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0) !important;
+    background-position:
+    calc(100% - 300px) 0,
+    13px 13px, 13px 13px, calc(100% - 13px) 13px, calc(100% - 13px) 13px,
+    13px calc(100% - 13px), 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(100% - 13px) calc(100% - 13px),
+    13px 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px) !important;
+    background-repeat: no-repeat !important;
+    background-size:
+    1px 100%,
+    18px 1px, 1px 18px, 18px 1px, 1px 18px,
+    18px 1px, 1px 18px, 18px 1px, 1px 18px,
+    6px 6px, 6px 6px, 6px 6px, 6px 6px !important;
 }
 
-/* the cover carried a drop shadow to float over the blur; on a flat field the
-   archive frames artwork with a rule, never a glow ----------------------- */
+.fs-feature-carousel-module-content {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.fs-feature-carousel-module-metadata-section {
+    padding-left: 26px !important;
+}
+
+/* the cover carried a drop shadow to float over the blur; the archive frames
+   artwork with a rule, never a glow --------------------------------------- */
 .fs-feature-carousel-module-album-image-container {
+    border: 1px solid var(--r-line-faint) !important;
     filter: none !important;
     box-shadow: none !important;
 }
 
-.fs-feature-carousel-module-metadata-section > .mantine-Stack-root {
-    padding: 0 !important;
-    border: 0 !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
+h1.fs-feature-carousel-module-title {
+    text-shadow: none !important;
 }
 
 /* the artist line and the format tags step down to the muted tone — the app
@@ -1993,6 +2035,130 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
 h5.fs-feature-carousel-module-title,
 .fs-feature-carousel-module-metadata-section .fs-text-module-root {
     color: var(--r-muted) !important;
+}
+
+.fs-feature-carousel-module-carousel-item::before {
+    content: "" !important;
+    position: absolute !important;
+    left: calc(100% - 262px) !important;
+    top: 50% !important;
+    z-index: 0 !important;
+    width: 224px !important;
+    height: 107px !important;
+    margin-top: -54px !important;
+    pointer-events: none !important;
+    background-color: transparent !important;
+    background-image: linear-gradient(150deg, var(--r-fg-soft) 0%, var(--r-fg) 100%) !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTguODciIHkyPSI4LjgwIi8+PGxpbmUgeDE9IjguODciIHkxPSItOC44MCIgeDI9IjE3Ljg5IiB5Mj0iLTE3Ljc1Ii8+PC9nPjwvc3ZnPg==") !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjE1LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiPjxjaXJjbGUgY3g9Ii0zNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGNpcmNsZSBjeD0iMzUuNTAiIGN5PSIwLjAwIiByPSIyNS4wMCIvPjxsaW5lIHgxPSItMTcuODkiIHkxPSItMTcuNzUiIHgyPSIxNy44OSIgeTI9IjE3Ljc1Ii8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9IjE3Ljc1IiB4Mj0iLTguODciIHkyPSI4LjgwIi8+PGxpbmUgeDE9IjguODciIHkxPSItOC44MCIgeDI9IjE3Ljg5IiB5Mj0iLTE3Ljc1Ii8+PC9nPjwvc3ZnPg==") !important;
+    -webkit-mask-position: center !important;
+    mask-position: center !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+    opacity: 0.22 !important;
+    animation: rhine-breathe 16s ease-in-out infinite alternate !important;
+}
+
+.fs-feature-carousel-module-carousel-item::after {
+    content: "" !important;
+    position: absolute !important;
+    left: calc(100% - 262px) !important;
+    top: 50% !important;
+    z-index: 0 !important;
+    width: 224px !important;
+    height: 107px !important;
+    margin-top: -54px !important;
+    pointer-events: none !important;
+    background-image:
+    conic-gradient(from var(--rhine-angle) at 50% 50%, transparent 0deg, var(--r-accent) 9deg, transparent 30deg, transparent 172deg, var(--r-accent) 181deg, transparent 202deg),
+    linear-gradient(color-mix(in srgb, var(--r-accent) 42%, transparent) 0 0) !important;
+    background-repeat: no-repeat !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNzUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iLTM1LjUwIiBjeT0iMC4wMCIgcj0iMjUuMDAiLz48Y2lyY2xlIGN4PSIzNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9Ii0xNy43NSIgeDI9IjE3Ljg5IiB5Mj0iMTcuNzUiLz48bGluZSB4MT0iLTE3Ljg5IiB5MT0iMTcuNzUiIHgyPSItOC44NyIgeTI9IjguODAiLz48bGluZSB4MT0iOC44NyIgeTE9Ii04LjgwIiB4Mj0iMTcuODkiIHkyPSItMTcuNzUiLz48L2c+PC9zdmc+") !important;
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzYuNTAgNjUuNTAiIHdpZHRoPSIxMzYuNTAiIGhlaWdodD0iNjUuNTAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4LjI1IDMyLjc1KSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIuNzUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iLTM1LjUwIiBjeT0iMC4wMCIgcj0iMjUuMDAiLz48Y2lyY2xlIGN4PSIzNS41MCIgY3k9IjAuMDAiIHI9IjI1LjAwIi8+PGxpbmUgeDE9Ii0xNy44OSIgeTE9Ii0xNy43NSIgeDI9IjE3Ljg5IiB5Mj0iMTcuNzUiLz48bGluZSB4MT0iLTE3Ljg5IiB5MT0iMTcuNzUiIHgyPSItOC44NyIgeTI9IjguODAiLz48bGluZSB4MT0iOC44NyIgeTE9Ii04LjgwIiB4Mj0iMTcuODkiIHkyPSItMTcuNzUiLz48L2c+PC9zdmc+") !important;
+    -webkit-mask-position: center !important;
+    mask-position: center !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+    animation: rhine-sweep 28s linear infinite !important;
+}
+
+.fs-feature-carousel-module-content::before {
+    content: "" !important;
+    position: absolute !important;
+    left: calc(100% - 150px) !important;
+    top: 50% !important;
+    z-index: 0 !important;
+    width: 4px !important;
+    height: 4px !important;
+    margin: -2px 0 0 -2px !important;
+    pointer-events: none !important;
+    background-color: transparent !important;
+    box-shadow:
+    92px 0 0 1px color-mix(in srgb, var(--r-fg) 40%, transparent),
+    65px -51px 0 0 color-mix(in srgb, var(--r-accent) 60%, transparent),
+    0 -51px 0 1px color-mix(in srgb, var(--r-fg) 26%, transparent),
+    -65px -51px 0 0 color-mix(in srgb, var(--r-fg) 34%, transparent),
+    -92px 0 0 1px color-mix(in srgb, var(--r-accent) 45%, transparent),
+    -65px 51px 0 0 color-mix(in srgb, var(--r-fg) 30%, transparent),
+    0 51px 0 1px color-mix(in srgb, var(--r-fg) 22%, transparent),
+    65px 51px 0 0 color-mix(in srgb, var(--r-accent) 40%, transparent) !important;
+    animation: rhine-turn 46s linear infinite, rhine-dust 11s ease-in-out infinite alternate !important;
+}
+
+.fs-feature-carousel-module-content::after {
+    content: "" !important;
+    position: absolute !important;
+    left: calc(100% - 150px) !important;
+    top: 50% !important;
+    z-index: 0 !important;
+    width: 3px !important;
+    height: 3px !important;
+    margin: -1.5px 0 0 -1.5px !important;
+    pointer-events: none !important;
+    background-color: transparent !important;
+    box-shadow:
+    132px 0 0 0 color-mix(in srgb, var(--r-fg) 20%, transparent),
+    66px -78px 0 0 color-mix(in srgb, var(--r-accent) 30%, transparent),
+    -66px -78px 0 0 color-mix(in srgb, var(--r-fg) 24%, transparent),
+    -132px 0 0 0 color-mix(in srgb, var(--r-accent) 26%, transparent),
+    66px 78px 0 0 color-mix(in srgb, var(--r-fg) 18%, transparent),
+    -66px 78px 0 0 color-mix(in srgb, var(--r-fg) 22%, transparent) !important;
+    animation: rhine-turn 92s linear infinite reverse, rhine-dust 17s ease-in-out infinite alternate !important;
+}
+
+@media (min-width: 1181px) {
+    .fs-feature-carousel-module-metadata-section {
+        padding-right: 336px !important;
+    }
+}
+
+@media (max-width: 1180px) {
+    /* no room for the field: the banner keeps only its frame */
+    .fs-feature-carousel-module-carousel-item {
+        background-image: linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0),
+    linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0) !important;
+        background-position: 13px 13px, 13px 13px, calc(100% - 13px) 13px, calc(100% - 13px) 13px,
+    13px calc(100% - 13px), 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(100% - 13px) calc(100% - 13px),
+    13px 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px) !important;
+        background-size: 18px 1px, 1px 18px, 18px 1px, 1px 18px,
+    18px 1px, 1px 18px, 18px 1px, 1px 18px,
+    6px 6px, 6px 6px, 6px 6px, 6px 6px !important;
+    }
+
+    .fs-feature-carousel-module-carousel-item::before,
+    .fs-feature-carousel-module-carousel-item::after,
+    .fs-feature-carousel-module-content::before,
+    .fs-feature-carousel-module-content::after {
+        display: none !important;
+    }
 }
 
 /* --- the queue and now-playing lists step down to the ground, so a filled
@@ -2127,6 +2293,24 @@ h5.fs-feature-carousel-module-title,
    tube across the artwork reads as damage rather than as a watermark. */
 
 
+
+@property --rhine-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+/* the light ring.js sends along the channel: one lap in 28 s */
+@keyframes rhine-sweep {
+    from { --rhine-angle: 0deg; }
+    to { --rhine-angle: 360deg; }
+}
+
+/* the dust turns as it breathes, never blinking out */
+@keyframes rhine-dust {
+    from { opacity: 0.4; scale: 0.92; }
+    to { opacity: 1; scale: 1.08; }
+}
 
 @keyframes rhine-breathe {
     from { opacity: 0.16; transform: scale(0.975); }
