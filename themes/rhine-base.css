@@ -546,6 +546,15 @@ h6 {
     background-color: var(--r-fg) !important;
 }
 
+/* the app inks a filled action's glyph with the primary contrast — the ink
+   for the accent's orange, not for the fg plate the theme puts under it, so
+   that glyph is re-inked to the plate's own ground ----------------------- */
+.fs-action-icon-module-root[data-variant='filled'] svg,
+.mantine-ActionIcon-root[data-variant='filled'] svg {
+    color: var(--r-bg) !important;
+    fill: var(--r-bg) !important;
+}
+
 .fs-action-icon-module-root[data-variant='outline'],
 .mantine-ActionIcon-root[data-variant='outline'] {
     color: var(--r-accent) !important;
@@ -1442,6 +1451,14 @@ body::after {
 .fs-list-config-menu-module-td {
     padding-left: 8px !important;
     border-bottom: 1px solid var(--r-hair) !important;
+}
+
+/* --- a label cell keeps its label, its chip and its own toggle on one line:
+   the column takes the width they need rather than wrapping the chip onto a
+   second row and floating the toggle halfway across the sheet ------------- */
+.fs-list-config-menu-module-th .mantine-Group-root {
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
 }
 
 /* --- the row lists inside the sheet (grid rows, table columns): one row per
