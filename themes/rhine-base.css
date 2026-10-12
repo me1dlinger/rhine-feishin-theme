@@ -1779,6 +1779,15 @@ body:has(.player-state-playing) .fs-left-controls-module-image-wrapper::after {
     object-fit: cover !important;
 }
 
+/* --- the combined-title cell is a plain block, so the clamped mark hangs
+   from the top of a 66px row; the image column centres its own mark, so the
+   combined cell centres its mark in the column too ----------------------- */
+.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row .fs-title-combined-column-module-image-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
 /* --- a hovered row raises a 2dp accent bar at its left edge, and the hover
    ground is the next panel step, never an inversion ---------------------- */
 .fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-hover-highlight-enabled[data-row-hovered='true'] {
