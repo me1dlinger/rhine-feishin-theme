@@ -2639,7 +2639,15 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
    20px and marks start at 13px, leaving a 7px gap, so nothing lands on the
    artwork. The pair of axes that used to run out of the frame is gone: it was
    laid out in a fixed 86px gutter, which the window takes away as it narrows -
-   the left axis left the screen and the right one ran into the transcript. */
+   the left axis left the screen and the right one ran into the transcript.
+
+   The index tab is centred and sized off the plate. `calc(50% - 13px)` was
+   meant to centre a 26px layer, but a percentage in background-position is
+   measured against (box - layer), so it landed 13px left of centre at EVERY
+   size, and 26px of tab on a plate the window has shrunk is a plank. `center`
+   is the exact centring, and the width is 5 % of the plate (14 to 30px), so
+   the tab stays the same mark on a big plate and on one the window has
+   shrunk instead of a 26px plank on a 260px cover. ----------------------- */
 .fs-full-screen-player-image-module-image-container::before {
     content: "" !important;
     position: absolute !important;
@@ -2647,9 +2655,9 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
     z-index: 3 !important;
     pointer-events: none !important;
     background-image: linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-fg-soft) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-accent) 0 0) !important;
-    background-position: 13px 13px, 13px 13px, calc(100% - 13px) 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), 13px 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(50% - 13px) 17px !important;
+    background-position: 13px 13px, 13px 13px, calc(100% - 13px) 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), 13px 13px, calc(100% - 13px) 13px, 13px calc(100% - 13px), calc(100% - 13px) calc(100% - 13px), center 17px !important;
     background-repeat: no-repeat !important;
-    background-size: 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 6px 6px, 6px 6px, 6px 6px, 6px 6px, 26px 3px !important;
+    background-size: 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 18px 1px, 1px 18px, 6px 6px, 6px 6px, 6px 6px, 6px 6px, clamp(14px, 5%, 30px) 3px !important;
 }
 
 /* --- an inverted plate keeps its ink when hovered -------------------------
@@ -3063,14 +3071,23 @@ body::after {
     transition: color 420ms var(--r-spring) !important;
 }
 
-.fs-lyric-line-module-lyric-line > .mantine-Stack-root > div {
-    color: inherit !important;
-}
-
-/* the translation is a subtitle, not a second lyric */
-.fs-lyric-line-module-lyric-line > .mantine-Stack-root > div:nth-child(2) {
+/* one lyric line can carry three voices stacked in its column: the original
+   (one span per line, or two when the translation pass in the main process
+   joins them with _BREAK_), then the romanisation under its own class, then
+   the translation. The original reads at the app's own size; the two
+   under-lines are subtitles, smaller and quieter, so a bilingual lyric reads
+   as a line and its gloss rather than as two equal lines. ---------------- */
+/* the app lays its scroll out from a line model (fontSize x line-height), so
+   a subtitle must not be shorter than the box the model reserved for it: the
+   glyphs shrink to 0.78em but the line box keeps the parent's 1.2em, which is
+   1.5385em of the smaller size. A smaller box would accumulate into hundreds
+   of pixels of drift over a long bilingual lyric. ------------------------ */
+.fs-lyric-line-module-lyric-line .mantine-Stack-root > span:last-child:nth-child(n + 2):not(.fs-lyric-line-module-romaji-line),
+.fs-lyric-line-module-romaji-line {
     color: var(--r-line-dim) !important;
-    font-size: 0.8em !important;
+    font-size: 0.78em !important;
+    line-height: 1.5385em !important;
+    letter-spacing: 0.01em !important;
 }
 
 .fs-lyric-line-module-lyric-line::before {
@@ -3104,7 +3121,8 @@ body::after {
     animation: rhine-decrypt 720ms cubic-bezier(0.22, 1, 0.36, 1) 1 both, rhine-print 900ms var(--r-spring) 1 both !important;
 }
 
-.lyrics-line-active > .mantine-Stack-root > div:nth-child(2) {
+.lyrics-line-active .mantine-Stack-root > span:last-child:nth-child(n + 2):not(.fs-lyric-line-module-romaji-line),
+.lyrics-line-active .fs-lyric-line-module-romaji-line {
     color: var(--r-fg-soft) !important;
 }
 
