@@ -1353,7 +1353,11 @@ img,
     color: var(--r-bg) !important;
 }
 
-[cmdk-item][data-selected='true'] *:not(img):not(svg) {
+/* Listed rather than `*`: a blanket rule reaches the paths inside an icon too,
+   and their fill is currentColor - painted paper, the mark then vanishes into
+   the plate it sits on. Text and controls only; the drawings keep their ink,
+   which is what the rules below re-ink as a whole. ----------------------- */
+[cmdk-item][data-selected='true'] :is(div, span, p, button, a, label, strong, em, small, h1, h2, h3, h4, h5, h6) {
     color: var(--r-bg) !important;
 }
 
@@ -1361,6 +1365,22 @@ img,
 [cmdk-item][data-selected='true'] [data-dimmed],
 [cmdk-item][data-selected='true'] .mantine-Text-root[data-variant='dimmed'] {
     color: color-mix(in srgb, var(--r-bg) 74%, var(--r-fg)) !important;
+}
+
+/* and the controls inside that row: a plain hover paints the case tone under a
+   mark the plate has already made paper, so the icon disappears into its own
+   hover face. On the plate the hover inverts instead - a paper face with an
+   ink mark - which is how every key in the archive reads. ----------------- */
+[cmdk-item][data-selected='true'] :is(.fs-action-icon-module-root, .mantine-ActionIcon-root):hover,
+[cmdk-item][data-selected='true'] :is(.fs-action-icon-module-root, .mantine-ActionIcon-root):active {
+    background-color: var(--r-bg) !important;
+    color: var(--r-fg) !important;
+}
+
+[cmdk-item][data-selected='true'] :is(.fs-action-icon-module-root, .mantine-ActionIcon-root):hover svg,
+[cmdk-item][data-selected='true'] :is(.fs-action-icon-module-root, .mantine-ActionIcon-root):active svg {
+    color: var(--r-fg) !important;
+    fill: var(--r-fg) !important;
 }
 
 [cmdk-separator] {
