@@ -492,6 +492,32 @@ h6 {
     border-color: var(--r-fg-soft) !important;
 }
 
+/* a filled plate that cannot be pressed keeps its shape and loses its signal.
+   The app dims a disabled control to 60 % opacity, which over an inverted
+   plate reads as a grey slab whose own ink is unreadable; the plate steps
+   down to the panel tone with muted ink instead, at full opacity. ---------- */
+.fs-button-module-root[data-variant='filled']:disabled,
+.mantine-Button-root[data-variant='filled']:disabled,
+.fs-button-module-root[data-variant='filled'][data-disabled],
+.mantine-Button-root[data-variant='filled'][data-disabled],
+.fs-play-button-module-play-button[data-variant='filled']:disabled,
+.fs-action-icon-module-root[data-variant='filled']:disabled,
+.mantine-ActionIcon-root[data-variant='filled']:disabled,
+.fs-action-icon-module-root[data-variant='filled'][data-disabled],
+.mantine-ActionIcon-root[data-variant='filled'][data-disabled] {
+    color: var(--r-muted) !important;
+    background-color: var(--r-case) !important;
+    border-color: var(--r-line-faint) !important;
+    opacity: 1 !important;
+}
+
+.fs-button-module-root[data-variant='filled']:disabled svg,
+.fs-action-icon-module-root[data-variant='filled']:disabled svg,
+.mantine-ActionIcon-root[data-variant='filled']:disabled svg {
+    color: var(--r-muted) !important;
+    fill: var(--r-muted) !important;
+}
+
 .fs-button-module-root[data-variant='outline'],
 .mantine-Button-root[data-variant='outline'] {
     color: var(--r-accent) !important;
