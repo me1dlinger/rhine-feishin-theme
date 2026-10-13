@@ -1135,36 +1135,20 @@ thead th,
     background-color: var(--r-case) !important;
 }
 
-/* the section's arrow: a hairline chevron in the accent, turned by the
-   section's own aria-expanded, so it reads whether or not the app draws one
-   of its own (that one is hidden below, to keep a single mark) ----------- */
-.fs-sidebar-module-accordion-control {
-    position: relative !important;
+/* the section's arrow is the app's own (a chevron span Mantine turns with
+   `data-rotate`): this sheet hands it back to the app and only states its
+   ink and size, rather than drawing a second one where it stood. --------- */
+.fs-sidebar-module-accordion-control > .mantine-Accordion-chevron,
+.fs-sidebar-module-accordion-control > .fs-accordion-module-chevron {
+    display: inline-flex !important;
+    align-items: center !important;
+    color: var(--r-mark) !important;
+    transition: color 200ms var(--r-spring) !important;
 }
 
-.fs-sidebar-module-accordion-control::after {
-    content: "" !important;
-    position: absolute !important;
-    top: 50% !important;
-    right: 15px !important;
-    width: 6px !important;
-    height: 6px !important;
-    margin-top: -5px !important;
-    pointer-events: none !important;
-    border-right: 1px solid var(--r-accent) !important;
-    border-bottom: 1px solid var(--r-accent) !important;
-    transform: rotate(45deg) !important;
-    transition: transform 260ms var(--r-spring), margin-top 260ms var(--r-spring) !important;
-}
-
-.fs-sidebar-module-accordion-control[aria-expanded='false']::after {
-    margin-top: -3px !important;
-    transform: rotate(-45deg) !important;
-}
-
-.mantine-Accordion-chevron,
-.fs-sidebar-module-accordion-chevron {
-    display: none !important;
+.fs-sidebar-module-accordion-control:hover > .mantine-Accordion-chevron,
+.fs-sidebar-module-accordion-control:hover > .fs-accordion-module-chevron {
+    color: var(--r-accent) !important;
 }
 
 .fs-sidebar-module-accordion-control .fs-text-module-root,
@@ -1237,12 +1221,14 @@ thead th,
     box-shadow: none !important;
 }
 
+/* a card under the pointer takes the accent frame - the same move this sheet
+   makes for every framed artwork - and its ground stays where it was: the dark
+   frame with a step-up ground read as a focus ring, not as a shelf. ------- */
 .fs-item-card-module-container:hover,
 .fs-poster-card-module-container:hover,
 .fs-grid-card-module-container:hover {
-    border-color: var(--r-fg) !important;
-    background-color: var(--r-case-hi) !important;
-    transform: none !important;
+    border-color: var(--r-accent) !important;
+    background-color: var(--r-case) !important;
 }
 
 .fs-item-card-module-image-container,
@@ -3933,4 +3919,19 @@ body:has(.player-state-playing) .fs-feature-carousel-module-metadata-section::af
 /* the notch the entry cuts into its own ink, and the accent tab it carries */
 .fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active::before {
     background-color: var(--r-bg) !important;
+}
+
+/* --- the card's caption hugs its own text ---------------------------------
+   The app reserves a fixed height for the block under the artwork (86px where
+   the text measures about 65px) and sets no horizontal padding at all, so the
+   title sat against the card's edge with a band of nothing under it. Here the
+   block is as tall as it reads and inset from the frame. ------------------ */
+.fs-item-card-module-detail-container,
+.fs-poster-card-module-detail-container,
+.fs-grid-card-module-detail-container {
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 5px 9px 5px !important;
+    overflow: visible !important;
 }
