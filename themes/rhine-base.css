@@ -369,12 +369,14 @@ h6 {
     left: 79px !important;
 }
 
-/* the web (hidden) and native styles keep no window controls in the bar: there
-   the plate is not drawn at all, which keeps the top line and the search field
-   under it clear ---------------------------------------------------------- */
-.fs-window-bar-module-window-bar:not(:has(.windows-container)):not(:has(.macos-container))::before,
-.fs-window-bar-module-window-bar:not(:has(.windows-container)):not(:has(.macos-container))::after {
-    display: none !important;
+/* The plate stands in every bar style - hiding it lost the wordmark, which is
+   the one mark the theme carries at the top. What it must not do is spill: in
+   a style that keeps a thin (or empty) bar, an unclipped plate painted its
+   wordmark over the field below the bar. Clipped to its own bar, it can only
+   ever draw inside it. --------------------------------------------------- */
+.fs-window-bar-module-window-bar::before,
+.fs-window-bar-module-window-bar::after {
+    overflow: hidden !important;
 }
 
 .fs-window-bar-module-window-bar .fs-window-bar-module-player-status-container,
@@ -3969,4 +3971,42 @@ body:has(.player-state-playing) .fs-feature-carousel-module-metadata-section::af
     height: auto !important;
     min-height: 0 !important;
     align-self: start !important;
+}
+
+/* --- the carousel's play cluster, the same plate as the cards' ------------
+   It arrived as the reference's rounded, frosted bubble - a radius, a blur and
+   a shadow, none of which this theme draws - and the cards' cluster was moved
+   onto a plate without it. This is that plate: square, hairline framed, no
+   blur, no shadow, and no glyph filled; the frame answers under the pointer.
+   ------------------------------------------------------------------------ */
+.fs-play-button-group-module-play-button-group {
+    box-sizing: border-box !important;
+    border: 1px solid var(--r-line-faint) !important;
+    border-radius: 0 !important;
+    background-color: color-mix(in srgb, var(--r-panel) 94%, transparent) !important;
+    background-image: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+.fs-play-button-group-module-play-button-group .fs-play-button-module-play-button,
+.fs-play-button-group-module-play-button-group button {
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    color: var(--r-fg) !important;
+    transition: color 200ms var(--r-spring) !important;
+}
+
+.fs-play-button-group-module-play-button-group .fs-play-button-module-play-button:hover,
+.fs-play-button-group-module-play-button-group button:hover {
+    background-color: transparent !important;
+    color: var(--r-accent) !important;
+}
+
+.fs-play-button-group-module-play-button-group svg {
+    color: inherit !important;
 }
