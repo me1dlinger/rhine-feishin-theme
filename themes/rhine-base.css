@@ -3195,16 +3195,16 @@ html[data-mantine-color-scheme='light'] body::after {
 
    1. THE DEPLOYMENT SEQUENCE (fx.js). Every start opens with a film under
       live overlays: letterbox bars carrying the identity, the self-check as a
-      deployment manifest whose eight plates fill one by one, the window's glow
-      taken to the accent, and SESSION AUTHORIZED stamped over it. A stylesheet
-      cannot time a film, so this is the same sequence compressed to 2.2 s, and
-      it tells one story in four beats - the identity, the self-check, the glow,
-      the verdict - with a single loader: the rail finishes and steps aside
-      before the glow arrives, so nothing reads as a bar starting over. Drawn
-      with the three pseudo-elements
-      the app leaves on <html> and <body>: the plate with its bars and identity
-      (html::before), the manifest rail (html::after) and the verdict band
-      (body::before). All three end at opacity 0 with visibility hidden and the
+      deployment manifest whose eight plates fill one by one. A stylesheet
+      cannot time a film, so this is that sequence compressed to 1.75 s and cut
+      to what a desktop window wants: the identity, then the self-check, then
+      the page. The reference's glow and its verdict are not here - a
+      full-screen accent flash and a stamp both read as glitches against a
+      window the user is already looking at, and the loader carries the
+      sequence on its own. Drawn with the two pseudo-elements
+      it leaves on <html>: the plate with its bars and identity (::before) and
+      the manifest rail (::after), whose fill is the only moving part. Both end
+      at opacity 0 with visibility hidden and the
       animation holds there, so the sequence is seen once per start, never
       takes the pointer, and is gone for good on its last frame.
 
@@ -3223,7 +3223,9 @@ html[data-mantine-color-scheme='light'] body::after {
       same object.
    ========================================================================== */
 
-/* --- the plate: letterbox bars, the identity in the top bar ------------- */
+/* --- the plate: letterbox bars, the identity in the top bar. The layers
+   read top first - the accent mark, the two rules, then the two bars - so the
+   mark lands ON the bar instead of under it. ----------------------------- */
 html::before {
     content: "RHINE LAB \FF0F AUDIO ARCHIVE" !important;
     position: fixed !important;
@@ -3232,12 +3234,12 @@ html::before {
     box-sizing: border-box !important;
     padding: 0 42px !important;
     pointer-events: none !important;
-    color: var(--r-fg);
-    background-color: var(--r-bg);
-    background-image: linear-gradient(var(--r-panel) 0 0), linear-gradient(var(--r-panel) 0 0), linear-gradient(var(--r-hair) 0 0), linear-gradient(var(--r-hair) 0 0), linear-gradient(var(--r-accent) 0 0) !important;
-    background-position: left top, left bottom, left 46px, left calc(100% - 47px), 42px 20.5px !important;
+    color: var(--r-fg) !important;
+    background-color: var(--r-bg) !important;
+    background-image: linear-gradient(var(--r-accent) 0 0), linear-gradient(var(--r-hair) 0 0), linear-gradient(var(--r-hair) 0 0), linear-gradient(var(--r-panel) 0 0), linear-gradient(var(--r-panel) 0 0) !important;
+    background-position: 42px 20.5px, left 46px, left calc(100% - 47px), left top, left bottom !important;
     background-repeat: no-repeat !important;
-    background-size: 100% 46px, 100% 46px, 100% 1px, 100% 1px, 5px 5px !important;
+    background-size: 5px 5px, 100% 1px, 100% 1px, 100% 46px, 100% 46px !important;
     font-family: var(--r-font-medium) !important;
     font-size: 10px !important;
     font-weight: 500 !important;
@@ -3246,7 +3248,7 @@ html::before {
     text-indent: 16px !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
-    animation: rhine-deploy-plate 2200ms linear 1 both !important;
+    animation: rhine-deploy-plate 1750ms linear 1 both !important;
 }
 
 /* --- the manifest: eight plates on a rail, filling in eight steps -------- */
@@ -3272,78 +3274,35 @@ html::after {
     letter-spacing: 0.18em !important;
     line-height: 12px !important;
     text-transform: uppercase !important;
-    animation: rhine-deploy-rail 2200ms linear 1 both, rhine-deploy-fill 2200ms steps(8, end) 1 both !important;
+    animation: rhine-deploy-rail 1750ms linear 1 both, rhine-deploy-fill 1750ms steps(8, end) 1 both !important;
 }
 
-/* --- the verdict: a stamp, not a second loader. It was an accent bar the
-   print head laid down from the left, which read as a progress bar starting
-   over the moment the manifest had finished. It lands whole now (opacity,
-   never a wipe), in ink rather than the accent, with the accent's own 5dp
-   mark before it, and it arrives after the glow has come and gone, so the
-   sequence reads as four beats: identity, self-check, the glow, the verdict. */
-body::before {
-    content: "SESSION AUTHORIZED" !important;
-    position: fixed !important;
-    right: 0 !important;
-    bottom: 46px !important;
-    left: 0 !important;
-    z-index: 2147482100 !important;
-    box-sizing: border-box !important;
-    height: 44px !important;
-    padding: 0 0 0 42px !important;
-    pointer-events: none !important;
-    color: var(--r-bg) !important;
-    background-color: var(--r-fg) !important;
-    background-image: linear-gradient(var(--r-accent) 0 0) !important;
-    background-position: 42px calc(50% - 2.5px) !important;
-    background-repeat: no-repeat !important;
-    background-size: 5px 5px !important;
-    text-indent: 16px !important;
-    font-family: var(--r-font-medium) !important;
-    font-size: 10px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.22em !important;
-    line-height: 44px !important;
-    text-transform: uppercase !important;
-    white-space: nowrap !important;
-    animation: rhine-deploy-verdict 2200ms linear 1 both !important;
-}
-
-/* 2200 ms, one beat each: the plate and its bars (0-6), the identity (15), the
-   manifest filling in eight steps (18-55) and stepping aside (56-61), the glow
-   taken to the accent and let go (61-78), the verdict stamped in (81), held to
-   90, then the whole overlay leaves on a single fade. --------------------- */
+/* 1750 ms, and the loader is the whole story: the plate and its bars (0-8),
+   the identity (19), the manifest filling in eight steps (23-69) and stepping
+   aside (71-77), the identity read for a beat, then the overlay leaves
+   (86-100). The glow the reference takes to the accent and the verdict stamp
+   that followed it are both gone: a full-screen accent flash reads as a
+   glitch in a desktop window, and the loader alone carries the sequence. --- */
 @keyframes rhine-deploy-plate {
-    0% { opacity: 0; color: transparent; background-color: var(--r-bg); }
-    6% { opacity: 1; color: transparent; }
-    15% { color: var(--r-fg); }
-    61% { background-color: var(--r-bg); color: var(--r-fg); }
-    67% { background-color: var(--r-accent); color: var(--r-on-accent); }
-    73% { background-color: var(--r-accent); color: var(--r-on-accent); }
-    78% { background-color: var(--r-bg); color: var(--r-fg); }
-    90% { opacity: 1; visibility: visible; }
+    0% { opacity: 0; color: transparent; }
+    8% { opacity: 1; color: transparent; }
+    19% { color: var(--r-fg); }
+    86% { opacity: 1; visibility: visible; }
     100% { opacity: 0; visibility: hidden; }
 }
 
 @keyframes rhine-deploy-rail {
     0% { opacity: 0; visibility: visible; }
-    17% { opacity: 0; }
-    22% { opacity: 1; }
-    56% { opacity: 1; }
-    61% { opacity: 0; visibility: hidden; }
+    22% { opacity: 0; }
+    27% { opacity: 1; }
+    71% { opacity: 1; }
+    77% { opacity: 0; visibility: hidden; }
     100% { opacity: 0; visibility: hidden; }
 }
 
 @keyframes rhine-deploy-fill {
-    0%, 18% { background-size: 0% 2px, 100% 5px, 100% 1px; }
-    55%, 100% { background-size: 100% 2px, 100% 5px, 100% 1px; }
-}
-
-@keyframes rhine-deploy-verdict {
-    0%, 79% { opacity: 0; visibility: visible; }
-    81% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
+    0%, 23% { background-size: 0% 2px, 100% 5px, 100% 1px; }
+    69%, 100% { background-size: 100% 2px, 100% 5px, 100% 1px; }
 }
 
 /* --- the wake takes its halo and loses its tail -------------------------- */
@@ -3457,8 +3416,7 @@ body::after {
 
 @media (prefers-reduced-motion: reduce) {
     html::before,
-    html::after,
-    body::before {
+    html::after {
         display: none !important;
     }
 
