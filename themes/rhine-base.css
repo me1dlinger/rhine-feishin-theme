@@ -517,7 +517,6 @@ h6 {
 .fs-action-icon-module-root[data-variant='filled']:disabled svg,
 .mantine-ActionIcon-root[data-variant='filled']:disabled svg {
     color: var(--r-muted) !important;
-    fill: var(--r-muted) !important;
 }
 
 .fs-button-module-root[data-variant='outline'],
@@ -3208,8 +3207,10 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
     .mantine-SegmentedControl-label[data-active='true'],
     [cmdk-item][data-selected='true'])
     :is(.fs-action-icon-module-root, .mantine-ActionIcon-root, button):is(:hover, :active) svg {
+    /* colour, never fill: a fill set here is inherited by every part of the
+       drawing that does not name its own, and the skip key's return arm - a
+       stroked bend - comes out as a solid blob of accent --------------- */
     color: var(--r-accent) !important;
-    fill: var(--r-accent) !important;
 }
 
 /* the active page of the pager */
