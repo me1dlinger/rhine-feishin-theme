@@ -3196,9 +3196,12 @@ html[data-mantine-color-scheme='light'] body::after {
    1. THE DEPLOYMENT SEQUENCE (fx.js). Every start opens with a film under
       live overlays: letterbox bars carrying the identity, the self-check as a
       deployment manifest whose eight plates fill one by one, the window's glow
-      taken to the accent, and SESSION AUTHORIZED stamped over it before the
-      whole thing flickers out. A stylesheet cannot time a film, so this is the
-      same sequence compressed to 2.3 s, drawn with the three pseudo-elements
+      taken to the accent, and SESSION AUTHORIZED stamped over it. A stylesheet
+      cannot time a film, so this is the same sequence compressed to 2.2 s, and
+      it tells one story in four beats - the identity, the self-check, the glow,
+      the verdict - with a single loader: the rail finishes and steps aside
+      before the glow arrives, so nothing reads as a bar starting over. Drawn
+      with the three pseudo-elements
       the app leaves on <html> and <body>: the plate with its bars and identity
       (html::before), the manifest rail (html::after) and the verdict band
       (body::before). All three end at opacity 0 with visibility hidden and the
@@ -3222,7 +3225,7 @@ html[data-mantine-color-scheme='light'] body::after {
 
 /* --- the plate: letterbox bars, the identity in the top bar ------------- */
 html::before {
-    content: "\25A0  RHINE LAB \FF0F AUDIO ARCHIVE" !important;
+    content: "RHINE LAB \FF0F AUDIO ARCHIVE" !important;
     position: fixed !important;
     inset: 0 !important;
     z-index: 2147482000 !important;
@@ -3243,7 +3246,7 @@ html::before {
     text-indent: 16px !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
-    animation: rhine-deploy-plate 2300ms linear 1 both !important;
+    animation: rhine-deploy-plate 2200ms linear 1 both !important;
 }
 
 /* --- the manifest: eight plates on a rail, filling in eight steps -------- */
@@ -3269,12 +3272,17 @@ html::after {
     letter-spacing: 0.18em !important;
     line-height: 12px !important;
     text-transform: uppercase !important;
-    animation: rhine-deploy-rail 2300ms linear 1 both, rhine-deploy-fill 2300ms steps(8, end) 1 both !important;
+    animation: rhine-deploy-rail 2200ms linear 1 both, rhine-deploy-fill 2200ms steps(8, end) 1 both !important;
 }
 
-/* --- the verdict: the print head lays the bar down, then the film ends --- */
+/* --- the verdict: a stamp, not a second loader. It was an accent bar the
+   print head laid down from the left, which read as a progress bar starting
+   over the moment the manifest had finished. It lands whole now (opacity,
+   never a wipe), in ink rather than the accent, with the accent's own 5dp
+   mark before it, and it arrives after the glow has come and gone, so the
+   sequence reads as four beats: identity, self-check, the glow, the verdict. */
 body::before {
-    content: "\25A0 SESSION AUTHORIZED" !important;
+    content: "SESSION AUTHORIZED" !important;
     position: fixed !important;
     right: 0 !important;
     bottom: 46px !important;
@@ -3284,48 +3292,57 @@ body::before {
     height: 44px !important;
     padding: 0 0 0 42px !important;
     pointer-events: none !important;
-    color: var(--r-on-accent) !important;
-    background-color: var(--r-accent) !important;
-    border-top: 1px solid var(--r-bg) !important;
+    color: var(--r-bg) !important;
+    background-color: var(--r-fg) !important;
+    background-image: linear-gradient(var(--r-accent) 0 0) !important;
+    background-position: 42px calc(50% - 2.5px) !important;
+    background-repeat: no-repeat !important;
+    background-size: 5px 5px !important;
+    text-indent: 16px !important;
     font-family: var(--r-font-medium) !important;
     font-size: 10px !important;
     font-weight: 500 !important;
     letter-spacing: 0.22em !important;
-    line-height: 43px !important;
+    line-height: 44px !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
-    animation: rhine-deploy-verdict 2300ms linear 1 both !important;
+    animation: rhine-deploy-verdict 2200ms linear 1 both !important;
 }
 
+/* 2200 ms, one beat each: the plate and its bars (0-6), the identity (15), the
+   manifest filling in eight steps (18-55) and stepping aside (56-61), the glow
+   taken to the accent and let go (61-78), the verdict stamped in (81), held to
+   90, then the whole overlay leaves on a single fade. --------------------- */
 @keyframes rhine-deploy-plate {
     0% { opacity: 0; color: transparent; background-color: var(--r-bg); }
-    7% { opacity: 1; color: transparent; }
-    14% { color: var(--r-fg); }
-    58% { background-color: var(--r-bg); }
-    62% { background-color: var(--r-accent); color: var(--r-on-accent); }
-    67% { background-color: var(--r-bg); color: var(--r-fg); }
-    88% { opacity: 1; visibility: visible; }
+    6% { opacity: 1; color: transparent; }
+    15% { color: var(--r-fg); }
+    61% { background-color: var(--r-bg); color: var(--r-fg); }
+    67% { background-color: var(--r-accent); color: var(--r-on-accent); }
+    73% { background-color: var(--r-accent); color: var(--r-on-accent); }
+    78% { background-color: var(--r-bg); color: var(--r-fg); }
+    90% { opacity: 1; visibility: visible; }
     100% { opacity: 0; visibility: hidden; }
 }
 
 @keyframes rhine-deploy-rail {
     0% { opacity: 0; visibility: visible; }
-    10% { opacity: 0; }
-    18% { opacity: 1; }
-    88% { opacity: 1; visibility: visible; }
+    17% { opacity: 0; }
+    22% { opacity: 1; }
+    56% { opacity: 1; }
+    61% { opacity: 0; visibility: hidden; }
     100% { opacity: 0; visibility: hidden; }
 }
 
 @keyframes rhine-deploy-fill {
-    0%, 20% { background-size: 0% 2px, 100% 5px, 100% 1px; }
-    62%, 100% { background-size: 100% 2px, 100% 5px, 100% 1px; }
+    0%, 18% { background-size: 0% 2px, 100% 5px, 100% 1px; }
+    55%, 100% { background-size: 100% 2px, 100% 5px, 100% 1px; }
 }
 
 @keyframes rhine-deploy-verdict {
-    0%, 57% { clip-path: inset(0 100% 0 0); opacity: 0; visibility: visible; }
-    59% { clip-path: inset(0 100% 0 0); opacity: 1; }
-    72% { clip-path: inset(0 0 0 0); }
-    88% { clip-path: inset(0 0 0 0); opacity: 1; visibility: visible; }
+    0%, 79% { opacity: 0; visibility: visible; }
+    81% { opacity: 1; }
+    90% { opacity: 1; }
     100% { opacity: 0; visibility: hidden; }
 }
 
