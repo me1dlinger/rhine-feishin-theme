@@ -158,10 +158,17 @@ body {
     -moz-osx-font-smoothing: grayscale !important;
 }
 
+/* every transition settles on the archive's own spring. This was a two-step
+   staircase (`steps(2, end)`), which reads as a stutter rather than as motion:
+   in a list that changes under the pointer - the search palette's rows, a
+   menu, a hovered key - it looked like the interface was dropping frames.
+   motion.js runs a critically damped spring for every move it makes, and the
+   tokens below are sampled from it, so the default is the spring; anything
+   that wants a harder or softer one names it. --------------------------- */
 *,
 *::before,
 *::after {
-    transition-timing-function: steps(2, end) !important;
+    transition-timing-function: var(--r-spring) !important;
 }
 
 ::selection {
@@ -1032,7 +1039,56 @@ thead th,
    NAVIGATION
    Sidebar entries are tracked capitals; the current one is an inverted plate
    with an orange tab on its left edge.
+
+   A section (the media library, the playlists) changes its panel's HEIGHT when
+   it opens, and the panel had no height transition at all: the section jumped,
+   one frame tall then one frame short, which is what the sidebar's collapse
+   and expand felt like. `interpolate-size` lets Chromium move a height towards
+   `auto`, and the spring drives it, so the rows arrive instead of appearing.
    -------------------------------------------------------------------------- */
+:root {
+    interpolate-size: allow-keywords;
+}
+
+.fs-accordion-module-panel,
+.mantine-Accordion-panel {
+    overflow: hidden !important;
+    transition: height 280ms var(--r-spring), opacity 160ms linear !important;
+}
+
+/* --- a list that is still arriving reads as an archive plate: a hairline
+   block with one sweep crossing it. The sweep is a transform on its own layer,
+   so it stays composited and costs the rows nothing ---------------------- */
+.fs-skeleton-module-skeleton {
+    position: relative !important;
+    overflow: hidden !important;
+    border: 1px solid var(--r-hair) !important;
+    background-color: var(--r-panel) !important;
+    background-image: none !important;
+}
+
+.fs-skeleton-module-skeleton::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    background-image: linear-gradient(100deg, transparent 0, color-mix(in srgb, var(--r-fg) 7%, transparent) 45% 55%, transparent 100%) !important;
+    animation: rhine-load 1500ms linear infinite !important;
+}
+
+@keyframes rhine-load {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fs-skeleton-module-skeleton::after {
+        animation: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   NAVIGATION
 
 .fs-sidebar-item-module-link {
     border: 0 !important;
@@ -1221,11 +1277,16 @@ img,
 .fs-combobox-module-dropdown {
     border: 1px solid var(--r-line-faint) !important;
     border-radius: 0 !important;
-    background-color: color-mix(in srgb, var(--r-panel) 96%, transparent) !important;
+    background-color: color-mix(in srgb, var(--r-panel) 98%, transparent) !important;
     background-image: none !important;
     box-shadow: none !important;
-    -webkit-backdrop-filter: blur(13px) saturate(0.8) !important;
-    backdrop-filter: blur(13px) saturate(0.8) !important;
+    /* the tone, not the blur. A 13px backdrop filter over a whole dialog is
+       re-blurred on every frame the surface repaints - every keystroke in the
+       search palette, every row that changes state, every scroll in a menu -
+       and at 96 % the panel behind it was never visible anyway. The small
+       chips (a tooltip, a card's play key) keep their frost. -------------- */
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
 }
 
 .fs-modal-module-header,
@@ -1767,6 +1828,26 @@ body::after {
 .fs-pagination-module-control[data-active='true']::after,
 .mantine-Pagination-control[data-active='true']::after {
     display: none !important;
+}
+
+/* --- the palette's footer keys: a hairline chip per key, and the key that
+   commits takes the accent's edge, the way the archive marks the one that
+   acts. (The footer's own label is a tracked caps Text, already dressed.) -- */
+.mantine-Kbd-root {
+    border: 1px solid var(--r-line-faint) !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    color: var(--r-fg) !important;
+    font-family: var(--r-font-medium) !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.12em !important;
+    box-shadow: none !important;
+}
+
+.mantine-Kbd-root:last-child {
+    border-color: var(--r-accent) !important;
+    color: var(--r-accent) !important;
 }
 
 /* --- the search field is an underline, not a box ------------------------- */
