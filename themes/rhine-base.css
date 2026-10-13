@@ -307,7 +307,9 @@ h6 {
     align-items: center !important;
     box-sizing: border-box !important;
     width: 88px !important;
-    height: 100% !important;
+    /* through the bar's own hairline, so the plate and the heavy rule under
+       the bar read as one body, not two with a light seam between --------- */
+    height: calc(100% + 1px) !important;
     padding-left: 30px !important;
     color: var(--r-bg) !important;
     background-color: var(--r-fg) !important;
