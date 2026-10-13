@@ -1807,6 +1807,35 @@ body::after {
     color: var(--r-bg) !important;
 }
 
+/* --- the setup sheet's provider picker. Two things about the tiles the app
+   builds from a segmented control:
+
+   1. THE NAME. The chosen tile is an inverted plate, and the plate's label
+      takes the ground ink — but the provider's name inside it is a Text node
+      the app inks with the foreground, so it stays ink-on-ink and the tile
+      reads as a logo on a black bar with no name. The name follows the plate.
+
+   2. THE JUMP. The document is centred in the frame, and OpenSubsonic needs
+      fewer fields than Navidrome (it drops the password help line: the block
+      measures 63px against 48px), so picking it shortens the document by 15px
+      and the centring moves every edge of the page by 8px. The document holds
+      its top edge instead, and grows downwards; that is also how the archive
+      reads a page — a document starts at the top. ------------------------- */
+.mantine-SegmentedControl-label[data-active='true'] .fs-text-module-root,
+.fs-segmented-control-module-label[data-active='true'] .fs-text-module-root,
+.mantine-SegmentedControl-label[data-active='true'] .mantine-Text-root,
+.fs-segmented-control-module-label[data-active='true'] .mantine-Text-root,
+.mantine-SegmentedControl-label[data-active='true'] .mantine-SegmentedControl-innerLabel,
+.fs-segmented-control-module-label[data-active='true'] .mantine-SegmentedControl-innerLabel {
+    color: var(--r-bg) !important;
+}
+
+.fs-action-required-route-module-wrapper {
+    align-items: flex-start !important;
+    box-sizing: border-box !important;
+    padding-top: 32px !important;
+}
+
 /* --- chips: the "acc" kind, an orange outline with an orange square ------ */
 .fs-badge-module-root,
 .mantine-Badge-root {
