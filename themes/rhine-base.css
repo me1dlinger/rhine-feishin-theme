@@ -355,6 +355,28 @@ h6 {
     border-bottom: 0 !important;
 }
 
+/* macOS: the traffic lights come first, so the plate and its mark stand clear
+   of them instead of over them ------------------------------------------- */
+.fs-window-bar-module-window-bar:has(.macos-container) {
+    padding-left: 168px !important;
+}
+
+.fs-window-bar-module-window-bar:has(.macos-container)::before {
+    left: 72px !important;
+}
+
+.fs-window-bar-module-window-bar:has(.macos-container)::after {
+    left: 79px !important;
+}
+
+/* the web (hidden) and native styles keep no window controls in the bar: there
+   the plate is not drawn at all, which keeps the top line and the search field
+   under it clear ---------------------------------------------------------- */
+.fs-window-bar-module-window-bar:not(:has(.windows-container)):not(:has(.macos-container))::before,
+.fs-window-bar-module-window-bar:not(:has(.windows-container)):not(:has(.macos-container))::after {
+    display: none !important;
+}
+
 .fs-window-bar-module-window-bar .fs-window-bar-module-player-status-container,
 .fs-window-bar-module-window-bar .player-status-text {
     color: var(--r-muted) !important;
@@ -3889,7 +3911,9 @@ body:has(.player-state-playing) .fs-feature-carousel-module-metadata-section::af
 .fs-item-card-controls-module-play-button.fs-item-card-controls-module-primary:hover {
     border-color: var(--r-accent) !important;
     background-color: var(--r-panel) !important;
-    color: var(--r-accent) !important;
+    /* the frame answers, the mark does not: a play triangle that turns solid
+       accent under the pointer is a fill, and this theme does not fill ---- */
+    color: var(--r-fg) !important;
 }
 
 .fs-item-card-controls-module-play-button svg {
@@ -3934,4 +3958,15 @@ body:has(.player-state-playing) .fs-feature-carousel-module-metadata-section::af
     min-height: 0 !important;
     padding: 5px 9px 5px !important;
     overflow: visible !important;
+}
+
+/* and the card itself hugs the same text: where the grid stretches a card to
+   its row's height (or the app reserves one), the ground ran on past the last
+   line as a band of nothing under the caption. --------------------------- */
+.fs-item-card-module-container,
+.fs-poster-card-module-container,
+.fs-grid-card-module-container {
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: start !important;
 }
