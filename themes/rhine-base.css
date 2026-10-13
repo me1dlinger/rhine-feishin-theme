@@ -1135,6 +1135,38 @@ thead th,
     background-color: var(--r-case) !important;
 }
 
+/* the section's arrow: a hairline chevron in the accent, turned by the
+   section's own aria-expanded, so it reads whether or not the app draws one
+   of its own (that one is hidden below, to keep a single mark) ----------- */
+.fs-sidebar-module-accordion-control {
+    position: relative !important;
+}
+
+.fs-sidebar-module-accordion-control::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 15px !important;
+    width: 6px !important;
+    height: 6px !important;
+    margin-top: -5px !important;
+    pointer-events: none !important;
+    border-right: 1px solid var(--r-accent) !important;
+    border-bottom: 1px solid var(--r-accent) !important;
+    transform: rotate(45deg) !important;
+    transition: transform 260ms var(--r-spring), margin-top 260ms var(--r-spring) !important;
+}
+
+.fs-sidebar-module-accordion-control[aria-expanded='false']::after {
+    margin-top: -3px !important;
+    transform: rotate(-45deg) !important;
+}
+
+.mantine-Accordion-chevron,
+.fs-sidebar-module-accordion-chevron {
+    display: none !important;
+}
+
 .fs-sidebar-module-accordion-control .fs-text-module-root,
 .mantine-Accordion-label {
     color: var(--r-muted) !important;
@@ -3018,10 +3050,12 @@ h5.fs-feature-carousel-module-title {
 }
 
 /* the active plate arrives rather than blinks: the reference slides a plate
-   between tabs, and a spring wipe reads the same way without a shared element */
+   between tabs, and a spring wipe reads the same way without a shared element.
+   The sidebar's own entry is deliberately not in this list: a wipe that starts
+   at scaleX(0) leaves the plate invisible whenever the entry is re-rendered,
+   and that entry is the one plate the sidebar cannot afford to lose. ------ */
 .fs-tabs-module-tab[data-active='true'],
-.mantine-Tabs-tab[data-active='true'],
-.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active {
+.mantine-Tabs-tab[data-active='true'] {
     animation: rhine-plate 380ms var(--r-spring) 1 both !important;
 }
 
@@ -3265,7 +3299,6 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
    the accent: the same move a bare glyph makes anywhere else in the archive.
    The plate itself keeps its own hover, restated above. ------------------- */
 :is(.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected,
-    .fs-sidebar-item-module-link.fs-sidebar-item-module-active,
     .fs-tabs-module-tab[data-active='true'],
     .mantine-Tabs-tab[data-active='true'],
     .fs-pagination-module-control[data-active='true'],
@@ -3279,7 +3312,6 @@ body:has(.player-state-playing) .mantine-Slider-root .mantine-Slider-thumb {
 }
 
 :is(.fs-item-table-list-column-module-container.fs-item-table-list-column-module-data-row.fs-item-table-list-column-module-row-selected,
-    .fs-sidebar-item-module-link.fs-sidebar-item-module-active,
     .fs-tabs-module-tab[data-active='true'],
     .mantine-Tabs-tab[data-active='true'],
     .fs-pagination-module-control[data-active='true'],
@@ -3842,4 +3874,63 @@ body:has(.player-state-playing) .fs-feature-carousel-module-metadata-section::af
 .fs-item-card-controls-module-primary svg {
     width: 18px !important;
     height: 18px !important;
+}
+
+/* ==========================================================================
+   THE CARD'S CONTROLS
+   The home cards' play cluster arrived as a rounded, frosted bubble - a 7px
+   radius, a 76 % ground behind a 10px backdrop blur and a drop shadow, with a
+   pointer that changed nothing. That is the one shape the archive never draws:
+   no radii, no blur, no shadows, and every key answers in the accent. The keys
+   themselves are bare glyphs, inked by `color`; nothing here touches `fill`,
+   so the open paths (the skip key's return arm) stay open.
+   ========================================================================== */
+.fs-item-card-controls-module-play-button {
+    box-sizing: border-box !important;
+    border: 1px solid var(--r-line-faint) !important;
+    border-radius: 0 !important;
+    background-color: color-mix(in srgb, var(--r-panel) 94%, transparent) !important;
+    background-image: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    color: var(--r-fg) !important;
+    transition: background-color 200ms var(--r-spring), border-color 200ms var(--r-spring), color 200ms var(--r-spring) !important;
+}
+
+.fs-item-card-controls-module-play-button:hover,
+.fs-item-card-controls-module-play-button:active,
+.fs-item-card-controls-module-play-button.fs-item-card-controls-module-primary:hover {
+    border-color: var(--r-accent) !important;
+    background-color: var(--r-panel) !important;
+    color: var(--r-accent) !important;
+}
+
+.fs-item-card-controls-module-play-button svg {
+    color: inherit !important;
+}
+
+/* --- the sidebar's current entry, restated at the end of the sheet ---------
+   The plate that marks the entry you are on stopped painting: something later
+   in the cascade now sets that entry's ground. Rather than chase it, the plate
+   is restated here, the way this sheet restates every other plate it cannot
+   afford to lose - the ink ground, the paper ink, the label and the glyph
+   with it, above the hover face as well as under it. -------------------- */
+.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active,
+.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active:hover,
+.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active:active {
+    background-color: var(--r-fg) !important;
+    color: var(--r-bg) !important;
+    border-color: var(--r-fg) !important;
+    box-shadow: none !important;
+}
+
+.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active .fs-sidebar-item-module-label,
+.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active svg {
+    color: var(--r-bg) !important;
+}
+
+/* the notch the entry cuts into its own ink, and the accent tab it carries */
+.fs-button-module-root.fs-sidebar-item-module-link.fs-sidebar-item-module-active::before {
+    background-color: var(--r-bg) !important;
 }
