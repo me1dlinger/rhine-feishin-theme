@@ -1582,6 +1582,25 @@ body::after {
 .fs-settings-option-module-row {
     border-bottom: 1px solid var(--r-hair) !important;
     box-shadow: none !important;
+    /* The app pins the row to one line (`wrap="nowrap"`) and caps the label
+       column at half its width, so in a narrow sheet - the Auto DJ panel, the
+       lyric settings - the label is the only thing that can give, and it ends
+       up about four characters wide while the control keeps its size. The
+       label column keeps a readable width instead, and the control drops under
+       it when the two no longer fit side by side. ------------------------- */
+    flex-wrap: wrap !important;
+    row-gap: 10px !important;
+}
+
+.fs-settings-option-module-row > .mantine-Stack-root {
+    /* a floor only: the app's own half-width cap still limits how far the
+       description can run in a wide sheet ------------------------------- */
+    min-width: 12rem !important;
+}
+
+/* the label is a stamp, not a paragraph: it never breaks mid-title --------- */
+.fs-settings-option-module-row > .mantine-Stack-root > .mantine-Group-root:first-child .fs-text-module-root {
+    white-space: nowrap !important;
 }
 
 .fs-settings-option-module-row-indented {
@@ -1614,6 +1633,32 @@ body::after {
 .fs-list-config-menu-module-th > .mantine-Stack-root > :first-child .fs-text-module-root,
 .fs-list-config-menu-module-th > .mantine-Stack-root > .mantine-Group-root:first-child .fs-text-module-root {
     white-space: nowrap !important;
+}
+
+/* --- but hugging costs the note its width: in a sheet this narrow (the Auto
+   DJ panel is 268dp wide) the description ends up wrapping four characters at
+   a time beside a control that never gives, and the label column is a table
+   cell, so it cannot be told to wrap. The row becomes a flex line instead: the
+   label takes the width it needs, the control keeps its size, and when the two
+   no longer fit the control drops below the label and hugs the right.
+   (A container query cannot do this - a `<table>` establishes no inline-size
+   containment, so the query never matches.) ------------------------------- */
+.fs-list-config-menu-module-table tr {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 4px 8px !important;
+}
+
+.fs-list-config-menu-module-table th {
+    flex: 1 1 13rem !important;
+    width: auto !important;
+    min-width: 0 !important;
+}
+
+.fs-list-config-menu-module-table td {
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
 }
 
 .fs-list-config-menu-module-td {
@@ -1956,7 +2001,7 @@ body::after {
    builds from a segmented control:
 
    1. THE NAME. The chosen tile is an inverted plate, and the plate's label
-      takes the ground ink — but the provider's name inside it is a Text node
+      takes the ground ink - but the provider's name inside it is a Text node
       the app inks with the foreground, so it stays ink-on-ink and the tile
       reads as a logo on a black bar with no name. The name follows the plate.
 
@@ -1965,7 +2010,7 @@ body::after {
       measures 63px against 48px), so picking it shortens the document by 15px
       and the centring moves every edge of the page by 8px. The document holds
       its top edge instead, and grows downwards; that is also how the archive
-      reads a page — a document starts at the top. ------------------------- */
+      reads a page - a document starts at the top. ------------------------- */
 .mantine-SegmentedControl-label[data-active='true'] .fs-text-module-root,
 .fs-segmented-control-module-label[data-active='true'] .fs-text-module-root,
 .mantine-SegmentedControl-label[data-active='true'] .mantine-Text-root,
@@ -3409,7 +3454,7 @@ html[data-mantine-color-scheme='light'] body::after {
    read top first - the accent mark, the two rules, then the two bars - so the
    mark lands ON the bar instead of under it. ----------------------------- */
 html::before {
-    content: "RHINE LAB \FF0F AUDIO ARCHIVE" !important;
+    content: "RHINE LAB \FF0F  AUDIO ARCHIVE" !important;
     position: fixed !important;
     inset: 0 !important;
     z-index: 2147482000 !important;
@@ -3435,7 +3480,7 @@ html::before {
 
 /* --- the manifest: eight plates on a rail, filling in eight steps -------- */
 html::after {
-    content: "SELF-CHECK \FF0F 08 PLATES" !important;
+    content: "SELF-CHECK \FF0F  08 PLATES" !important;
     position: fixed !important;
     top: 50% !important;
     left: 42px !important;
@@ -3670,7 +3715,7 @@ body::after {
    the transcript under the artwork the panel is a section, not a document -- */
 @media (min-width: 1200px) {
     .fs-lyrics-module-lyrics-container::before {
-        content: "LYRICS \FF0F SYNCHRONIZED" !important;
+        content: "LYRICS \FF0F  SYNCHRONIZED" !important;
         position: absolute !important;
         top: 16px !important;
         left: 27px !important;
@@ -4012,4 +4057,72 @@ body:has(.player-state-playing) .fs-feature-carousel-module-metadata-section::af
     background-color: transparent !important;
     color: var(--r-fg) !important;
     box-shadow: inset 0 0 0 1px var(--r-accent) !important;
+}
+
+/* ==========================================================================
+   the visualizer - the archive's SIGNAL surface
+   --------------------------------------------------------------------------
+   The spectrum itself is painted into a canvas by the app (audioMotionAnalyzer)
+   from a gradient held in that visualizer's own settings, so a sheet cannot
+   reach it: what is styled here is everything around it - the paper it sits on,
+   the rail its controls ride, and the title card, which the app prints in #ddd
+   over a black veil.
+   ========================================================================== */
+.fs-full-screen-visualizer-module-container {
+    background-color: var(--r-bg) !important;
+}
+
+.fs-full-screen-visualizer-module-visualizer-container {
+    position: relative !important;
+}
+
+/* the eyebrow every archive document heads itself with --------------------- */
+@media (min-width: 1200px) {
+    .fs-full-screen-visualizer-module-visualizer-container::before {
+        content: "SIGNAL \FF0F  SPECTRUM" !important;
+        position: absolute !important;
+        top: 16px !important;
+        left: 27px !important;
+        z-index: 2 !important;
+        pointer-events: none !important;
+        color: var(--r-muted) !important;
+        font-family: var(--r-font-medium) !important;
+        font-size: 8px !important;
+        font-weight: 500 !important;
+        letter-spacing: 0.2em !important;
+        text-transform: uppercase !important;
+    }
+}
+
+/* the surface's controls close it on their own rail ----------------------- */
+.fs-full-screen-visualizer-module-controls-container {
+    background-color: var(--r-bg) !important;
+    border-bottom: 1px solid var(--r-hair) !important;
+    backdrop-filter: none !important;
+}
+
+/* --- the title card: white on a black veil in the app, ink on the archive's
+   own paper here. The name keeps the display type and the credit steps down to
+   a tracked label under it ----------------------------------------------- */
+.fs-full-screen-visualizer-module-song-info-backdrop {
+    background: color-mix(in srgb, var(--r-bg) 82%, transparent) !important;
+}
+
+.fs-full-screen-visualizer-module-song-info-overlay {
+    text-shadow: none !important;
+}
+
+.fs-full-screen-visualizer-module-song-info-title {
+    color: var(--r-fg) !important;
+    font-family: var(--r-font-medium) !important;
+    text-shadow: none !important;
+}
+
+.fs-full-screen-visualizer-module-song-info-artist {
+    color: var(--r-muted) !important;
+    font-family: var(--r-font-medium) !important;
+    font-size: clamp(0.7rem, 1.05vw, 0.95rem) !important;
+    letter-spacing: 0.24em !important;
+    text-transform: uppercase !important;
+    text-shadow: none !important;
 }
