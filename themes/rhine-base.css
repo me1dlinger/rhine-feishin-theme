@@ -1342,9 +1342,25 @@ img,
     color: var(--r-muted) !important;
 }
 
+/* the row under the pointer, or under the arrow keys, inverts to an ink plate
+   - and the text inside it is the app's own: a result title inked with the
+   foreground, its second line with the dimmed tone. On the plate the title is
+   ink on ink, so the row reads as a black bar with a thumbnail on it. Every
+   part of a chosen row follows the plate, and the quieter line keeps one step
+   of its own so the two lines still rank. -------------------------------- */
 [cmdk-item][data-selected='true'] {
     background-color: var(--r-fg) !important;
     color: var(--r-bg) !important;
+}
+
+[cmdk-item][data-selected='true'] *:not(img):not(svg) {
+    color: var(--r-bg) !important;
+}
+
+[cmdk-item][data-selected='true'] [style*='dimmed'],
+[cmdk-item][data-selected='true'] [data-dimmed],
+[cmdk-item][data-selected='true'] .mantine-Text-root[data-variant='dimmed'] {
+    color: color-mix(in srgb, var(--r-bg) 74%, var(--r-fg)) !important;
 }
 
 [cmdk-separator] {
